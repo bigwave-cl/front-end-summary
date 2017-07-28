@@ -1,0 +1,162 @@
+1、viewport 简单粗暴的方式：
+<meta name="viewport" content="width=320,maximum-scale=1.3,user-scalable=no">
+直接设置viewport为320px的1.3倍，将页面放大1.3倍。
+为什么是1.3？
+目前大部分页面都是以320px为基准的布局，而iphone6的宽度比是375/320 = 1.171875，iphone6+则是 
+414/320 = 1.29375那么以1.29倍也就约等于1.3了。
+
+@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+  /*iphone 6*/
+}
+
+@media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){
+  /*iphone 6 plus*/
+}
+PS: 也可以直接使用实际的device-width：如 device-width : 375px
+@media (device-width:375px) and (-webkit-min-device-pixel-ratio:2){/* 兼容iphone 6 */
+.class{}
+}
+@media (device-width:414px) and (-webkit-min-device-pixel-ratio:3.0){/* 兼容iphone6 plus */
+.class{}
+}
+
+
+2、如果仅仅是适配ip6+设备，那么使用media query就行。
+伪代码如下：
+/*320px布局*/
+html{font-size: 100px;}
+body{font-size: 0.14rem /*实际相当于14px*/}
+
+/* iphone 6 */
+@media (min-device-width : 375px) and (max-device-width : 667px) and (-webkit-min-device-pixel-ratio : 2){
+    html{font-size: 117.1875px;}
+}
+/* iphone6 plus */
+@media (min-device-width : 414px) and (max-device-width : 736px) and (-webkit-min-device-pixel-ratio : 3){
+    html{font-size: 129.375px;}
+}
+这样，在ip6下，也就将页面内的元素放大了1.17倍，ip6+下也就是放大了1.29倍。
+ 
+3、如果是完全自适应，那么可以通过JS来控制。
+(function (doc, win) {
+  var docEl = doc.documentElement,
+    resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
+    recalc = function () {
+      var clientWidth = docEl.clientWidth;
+      if (!clientWidth) return;
+      docEl.style.fontSize = 100 * (clientWidth / 320) + 'px';
+    };
+
+  // Abort if browser does not support addEventListener
+  if (!doc.addEventListener) return;
+  win.addEventListener(resizeEvt, recalc, false);
+  doc.addEventListener('DOMContentLoaded', recalc, false);
+})(document, window);
+页面初始化的时候计算font-size，然后再绑定resize事件。这种效果就和百分比布局一样了。
+那么用REM做单位与百分比做单位有什么优势？
+主要优势在于能更好的控制元素大小。（一般百分比应用在布局层，一般常见设置为50%，33.3%，25%之
+类的整数居多，难以运用在复杂的页面小部件内）。但是相比百分比布局，需要借助JS或media query实
+现，略有一点瑕疵。
+
+
+4、背景图片高清化
+
+/* 普通显示屏(设备像素比例小于等于1)使用1倍的图 */
+  .css{
+      background-image: url(img_1x.png);
+  }
+
+  /* 高清显示屏(设备像素比例大于等于2)使用2倍图  */
+  @media only screen and (-webkit-min-device-pixel-ratio:2){
+      .css{
+    background-image: url(img_2x.png);
+      }
+  }
+
+  /* 高清显示屏(设备像素比例大于等于3)使用3倍图  */
+  @media only screen and (-webkit-min-device-pixel-ratio:3){
+      .css{
+    background-image: url(img_3x.png);
+      }
+  }
+
+5、上下拉动滚动条时卡顿、慢
+body {
+
+    -webkit-overflow-scrolling: touch;
+    overflow-scrolling: touch;
+}
+
+Android3+和iOS5+支持CSS3的新属性为overflow-scrolling
+
+6、禁止复制、选中文本
+Element {
+
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+7、长时间按住页面出现闪退
+element {
+
+  -webkit-touch-callout:none;
+}
+
+8、iphone及ipad下输入框默认内阴影
+Element{
+  -webkit-appearance:none;
+}
+
+9、transition闪屏
+/设置内嵌的元素在3D 空间如何呈现：保留3D /
+-webkit-transform-style: preserve-3d;
+/ 设置进行转换的元素的背面在面对用户时是否可见：隐藏 / 
+-webkit-backface-visibility:hidden;
+
+10、select 下拉选择设置右对齐
+设置如下：
+select option {
+direction: rtl;
+}
+
+11、通过transform进行skew变形，rotate旋转会造成出现锯齿现象
+可以设置如下：
+-webkit-transform: rotate(-4deg) skew(10deg) translateZ(0);
+ transform: rotate(-4deg) skew(10deg) translateZ(0);
+ outline: 1px solid rgba(255,255,255,0)
+
+12、移动端点透问题
+案例如下：
+<div id="haorooms">点头事件测试</div>
+ 
+<a href="www.baidu.net">www.baidu.com</a>
+div是绝对定位的蒙层,并且z-index高于a。而a标签是页面中的一个链接，我们给div绑定tap事件：
+$('#haorooms').on('tap',function(){
+$('#haorooms').hide();
+});
+我们点击蒙层时 div正常消失，但是当我们在a标签上点击蒙层时，发现a链接被触发，这就是所谓的点透事件。
+原因：
+touchstart 早于 touchend 早于click。 亦即click的触发是有延迟的，这个时间大概在300ms左右，也就是说我们tap触发之后蒙层隐藏， 此时 click还没有触发，300ms之后由于蒙层隐藏，我们的click触发到了下面的a链接上。
+解决：
+（1）尽量都使用touch事件来替换click事件。例如用touchend事件(推荐)。
+（2）用fastclick，https://github.com/ftlabs/fastclick
+（3）用preventDefault阻止a标签的click
+（4）延迟一定的时间(300ms+)来处理事件 （不推荐）
+（5）以上一般都能解决，实在不行就换成click事件。
+下面介绍一下touchend事件，如下：
+$("#haorooms").on("touchend",function(event) {
+   event.preventDefault();
+ });
+
+13、唤起select的option展开
+zepto方式:
+$(sltElement).trrgger("mousedown");
+原生js方式:
+functionshowDropdown(sltElement) {
+  varevent;
+  event = document.createEvent('MouseEvents');
+  event.initMouseEvent('mousedown',true,true, window);
+  sltElement.dispatchEvent(event);
+};

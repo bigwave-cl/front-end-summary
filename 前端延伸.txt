@@ -1,0 +1,14 @@
+web移动端的开发注意事项:
+http://www.qdfuns.com/notes/21859/cc2b459cf927b9ac69f961d5a9d2d735.html
+
+
+手机/移动前端开发需要注意的20个要点：
+http://sentsin.com/web/54.html
+
+paletton 配色网站
+
+前端知识体系集结
+https://li-xinyang.gitbooks.io/frontend-notebook/content/chapter1/02_01_sublime.html
+
+gulp插件全集
+http://www.jianshu.com/p/df65ae89b862

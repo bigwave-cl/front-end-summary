@@ -1,0 +1,134 @@
+操作符之间的优先级（高到低）:
+
+算术操作符 → 比较操作符 → 逻辑操作符 → "="赋值符号
+
+
+具有 true 和 false 两个属性的属性，
+如 checked, selected 或者 disabled 使用prop()，其他的使用 attr()
+
+
+//获取一个月中的最后一天
+function getLastDay(year,month) {         
+    var new_year = year;    //取当前的年份          
+    var new_month = month++;//取下一个月的第一天，方便计算（最后一天不固定）          
+    if(month>12) {         
+     	new_month -=12;        //月份减          
+     	new_year++;            //年份增          
+    }         
+    var new_date = new Date(new_year,new_month,1);                //取当年当月中的第一天          
+    return (new Date(new_date.getTime()-1000*60*60*24)).getDate();//获取当月最后一天日期          
+} 
+var d = new Date();
+document.write(d.getFullYear());
+document.write('<br/>');
+document.write(d.getMonth()+1);
+document.write('<br/>');
+document.write(getLastDay(d.getFullYear(),d.getMonth()+1));
+document.write('<br/>');
+
+
+判断文字有多少字符串：
+
+方法一：使用正则表达式，代码如下：
+
+function getByteLen(val) {
+    var len = 0;
+    for (var i = 0; i < val.length; i++) {
+         var a = val.charAt(i);
+         if (a.match(/[^\x00-\xff]/ig) != null) 
+        {
+            len += 2;
+        }
+        else
+        {
+            len += 1;
+        }
+    }
+    return len;
+}
+
+方法二：使用字符unicode判断：方法如下：
+function getByteLen(val) {
+    var len = 0;
+    for (var i = 0; i < val.length; i++) {
+       var length = val.charCodeAt(i);
+       if(length>=0&&length<=128)
+        {
+            len += 1;
+        }
+        else
+        {
+            len += 2;
+        }
+    }
+    return len;
+}
+
+1.操作任何元素前先将其从文档卸载，完了再贴回去。
+
+var $myList = $("#list-container > ul").detach();
+//...一大堆对$myList的处理
+$myList.appendTo("#list-container");
+
+
+2.代码里将HTML组织好后再一次性贴到DOM中去。
+
+// 这样不好
+var $myList = $("#list");
+for(var i = 0; i < 10000; i++){
+    $myList.append("<li>"+i+"</li>");
+}
+ 
+// 这样好
+var $myList = $("#list");
+var list = "";
+for(var i = 0; i < 10000; i++){
+    list += "<li>"+i+"</li>";
+}
+$myList.html(list);
+ 
+// 但这样更好
+var array = []; 
+for(var i = 0; i < 10000; i++){
+    array[i] = "<li>"+i+"</li>"; 
+}
+$myList.html(array.join(''));
+
+http://www.cnblogs.com/Wayou/p/jquery_best_practise.html
+
+
+typeof的一些升级用法：http://sentsin.com/web/55_2.html
+
+摄氏度转华氏度
+
+从Celsius摄氏度转换为Fahrenheit华氏度的算法是：摄氏度的温度乘于9除于5，再加上32。
+
+function convert(celsius) {
+// Only change code below this line
+
+var  fahrenheit;
+   fahrenheit = celsius*9/5+32;
+// Only change code above this line
+return fahrenheit;
+}
+
+// Change the inputs below to test your code
+convert(30);
+
+
+
+检测客户端系统：
+“Navigator.appversion”用于在客户端中查找操作系统的名称。
+为了检测客户端机器上的操作系统，应使用navigator.appVersionS（字符串属性）。
+
+    屏幕对象用于从客户端屏幕读取信息。屏幕对象的属性是:
+    AvailHeight：给出客户端屏幕的高度
+    AvailWidth：给出客户端屏幕的宽度。
+    ColorDepth：给出客户端屏幕上图像的位深度
+    Height：给出客户端屏幕的总高度，包括任务栏
+    Width：给出客户端屏幕的总宽度，包括任务栏
+
+
+解释window.onload和onDocumentReady？
+在加载页面上的所有信息之前，不会运行onload函数。 这导致在执行任何代码之前的显着延迟。
+onDocumentReady在加载DOM之后加载代码。 它允许提前处理代码。

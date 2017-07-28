@@ -1,0 +1,75 @@
+body {
+    font-family: 'Microsoft YaHei', Monospace, Arial, 'Helvetica Neue', Helvetica, sans-serif;
+    overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    background: #f1f1f1;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+body.clearing-body {
+    background: #fff;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
+
+
+
+/* 自定义多选框样式 */
+.pos-check {
+    display: inline-block;
+}
+
+.pos-check input[type^='checkbox'] {
+    display: none;
+    visibility: hidden;
+    opacity: 0;
+}
+
+.pos-check input[type^='checkbox'] + label {
+    position: relative;
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin: 0;
+    cursor: pointer;
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 2px #d5d4d4, 0 0 3px #d5d4d4;
+}
+
+.pos-check input[type^='checkbox'] + label:before {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: block;
+    width: 60%;
+    height: 35%;
+    content: '';
+    -webkit-transition: all .3s linear;
+    transition: all .3s linear;
+    -webkit-transform: translate(-50%, -60%) rotate(-45deg) skewY(-5deg);
+    -ms-transform: translate(-50%, -60%) rotate(-45deg) skewY(-5deg);
+    transform: translate(-50%, -60%) rotate(-45deg) skewY(-5deg);
+    opacity: 0;
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+    border-radius: 3px;
+    background: transparent;
+}
+
+.pos-check input[type^='checkbox']:checked + label {
+    background-color: #de4444;
+}
+
+.pos-check input[type^='checkbox']:checked + label:before {
+    opacity: 1;
+}
+
+.pos-check input[type^='checkbox']:disabled + label {
+    background-color: #666;
+}

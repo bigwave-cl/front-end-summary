@@ -1,0 +1,83 @@
+  $.ajax({
+    method: "POST",
+    url: "some.php",
+    data: {
+      name: "John",
+      location: "Boston"
+    },
+    dataType: 'json' //跨域用jsonp
+  }).done(function(msg) {
+    alert("Data Saved: " + msg);
+  }).fail(function(result) {});
+
+  $.ajax({
+    method: "GET",
+    url: options.domain + "/webservice/kuaiJianKang/NewGetSetUserAddress",
+    data: {
+      user_id: uid
+    },
+    dataType: 'json', //跨域用jsonp
+    timeout: 10000,
+    beforeSend: function beforeSend() {
+      Pace.start();
+    }
+  }).done(function(result) {
+    console.log(result);
+    setTimeout(function() {
+      Pace.stop();
+    }, 3000)
+  }).fail(function(result) {});
+
+  参考网址：
+  http: //www.css88.com/jqapi-1.9/jQuery.ajax/
+
+    var jqxhr = $.ajax({
+      url: url,
+      type: "GET", // 默认为GET,你可以根据需要更改
+      cache: true, // 默认为true,但对于script,jsonp类型为false,可以自行设置
+      data: {}, // 将请求参数放这里.
+      dataType: "json", // 指定想要的数据类型
+      jsonp: "callback", // 指定回调处理JSONP类型的请求
+      statusCode: { // 如果你想处理各状态的错误的话
+        404: handler404,
+        500: handler500
+      }
+    });
+  jqxhr.done(successHandler);
+  jqxhr.fail(failureHandler);
+
+
+  $.ajax({
+    //提交数据的类型 POST GET
+    type: "POST",
+    //提交的网址
+    url: url,
+    //提交的数据
+    data: {
+      Name: "sanmao",
+      Password: "sanmaoword"
+    },
+    //返回数据的格式
+    datatype: "json", //"xml", "html", "script", "json", "jsonp", "text".
+    //在请求之前调用的函数
+    beforeSend: function() {
+      /* $("#msg").html("logining"); */
+      alert("ajax请求前执行方法!");
+    },
+    //成功返回之后调用的函数             
+    success: function(data) {
+      /* $("#msg").html(decodeURI(data)); */
+      alert("成功了!");
+    },
+    //调用执行后调用的函数
+    complete: function(XMLHttpRequest, textStatus) {
+      alert(XMLHttpRequest.responseText);
+      alert(textStatus);
+      //HideLoading();
+    },
+    //调用出错执行的函数
+    error: function() {
+      //请求出错处理
+      alert("出错了!")
+    }
+  });

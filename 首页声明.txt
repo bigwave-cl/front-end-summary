@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans"> <!-- 简体中文页面：zh-cmn-Hans、繁体中文页面：zh-cmn-Hant、英语页面：en -->
+<head>
+	<meta charset="UTF-8">
+	<!-- 不允许缩放 -->
+	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+	<!-- IE兼容模式。Internet Explorer 支持使用兼容性 <meta> 标签来指定使用什么版本的 IE 来渲染页面。如果不是特殊需要，通常通过 edge mode 来通知 IE 使用最新的兼容模式。 IE 以最高级模式渲染文档(使用Chrome Frame渲染)-->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"> 
+	<!-- WebApp全屏模式 -->
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<!-- 禁用自动识别为电话号码 -->
+	<meta content="telephone=no" name="format-detection" />
+	<!-- 禁用识别邮箱 -->
+	<meta content="email=no" name="format-detection" />
+	<!-- 添加到主屏后的标题 -->
+	<meta name="apple-mobile-web-app-title" content="啦啦啦">
+	<!-- 隐藏状态栏/设置状态栏颜色 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+	<!-- 微信X5浏览器强制竖屏 -->
+	<meta name="x5-orientation" content="portrait"/>
+	<!-- 微信X5浏览器强制全屏 -->
+	<meta name="x5-fullscreen" content="true"/>
+	<!-- 微信X5浏览器网页应用模式（定制工具栏，全屏显示） -->
+	<meta name="x5-page-mode" content="app"/>
+	<!-- 针对手持设备优化，主要是针对一些老的不识别viewport的浏览器，比如黑莓 -->
+	<meta name="HandheldFriendly" content="true">
+	<!-- 微软的老式浏览器 -->
+	<meta name="MobileOptimized" content="320">
+	<!-- uc强制竖屏 -->
+	<meta name="screen-orientation" content="portrait">
+	<!-- QQ强制竖屏 -->
+	<meta name="x5-orientation" content="portrait">
+	<!-- UC强制全屏 -->
+	<meta name="full-screen" content="yes">
+	<!-- UC应用模式 -->
+	<meta name="browsermode" content="application">
+	<!-- windows phone 点击无高光 -->
+	<meta name="msapplication-tap-highlight" content="no">
+	<!-- 国内各种浏览器使用webkit内核 -->
+	<meta name="renderer" content="webkit|ie-comp|ie-stand">
+	<!-- Windows 8 磁贴颜色 -->
+	<meta name="msapplication-TileColor" content="#000"/>
+	<!-- Windows 8 磁贴图标 -->
+	<meta name="msapplication-TileImage" content="http://sss/logo.png"/>
+	<!-- 百度禁止转码 -->
+	<meta http-equiv="Cache-Control" content="no-siteapp" />
+	<!-- 禁用浏览器缓存 -->
+	<meta http-equiv="Pragma" content="no-cache">
+	<!-- SEO优化 -->
+	<title>title</title>
+	<!-- 页面关键词 -->
+	<meta name="keywords" content="your keywords">
+	<!-- 页面描述内容 -->
+	<meta name="description" content="your description">
+	<!-- 定义网页作者 -->
+	<meta name="author" content="author,email address">
+	<!-- 定义网页搜索引擎索引方式 -->
+	<meta name="robots" content="index,follow">
+</head>
+<body>
+	
+</body>
+</html>

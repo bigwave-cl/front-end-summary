@@ -1,0 +1,77 @@
+directive(指令)
+
+什么是指令？
+指令是新型的API，用界面的声明化作为需求，来指导我们的代码封装。
+
+注意事项：
+别把任何代码都塞到控制器里！
+
+控制器的设计出发点是封装单个视图的业务逻辑，因此，不要进行以下操作：
+DOM操作
+应当将DOM操作使用指令/directive进行封装。
+变换输出形式
+应当使用过滤器/filter对输出显示进行转化。
+跨控制器共享代码
+对于需要复用的基础代码，应当使用服务/service进行封装
+
+对于每个angularjs都有一个app，他是相当于程序的引导者（类似以人死了去黄泉路上开始找不到地方，有个引路人带他去），一般都是写在你想要注入angularjs的位置写上ng-app=“某某某”还有种情况就是手动引导（相当于这个引路人需要你去找）手动引导代码
+        angular.bootstrap($("body"),["app"]);
+bootstrap方法有三个参数：
+element ： 一个DOM元素，以这个元素为Angular应用的根，等同自动引导时ng-app所在 的元素。这个参数是必须的。比如：document、document.body等。
+modules ： 引导时需要载入的模块数组。比如：[]、["ezstuff"]等。由于我们的HTML中引用 了ezstuff模块中定义的ez-duang指令，所以，我们需要指定载入ezstuff模块。
+config ：引导配置项，可选。
+
+
+//瀑布流指令
+app.directive('masonryList', [function() {
+    return {
+        restrict: 'A',
+        link: function(scope,tElement,tAttrs){
+             if(scope.$last === true){
+                setTimeout(function() {
+                    img_location("mansory_list_id", "mansory-box");
+                },0);
+            }
+            window.onresize = function(){
+                img_location("mansory_list_id", "mansory-box");
+            }
+
+            function get_child_element(parent, content) { //获得子元素个数
+                var content_array = []; //定义数组
+                var all_content = parent.getElementsByTagName("*"); //取得父元素下的的所有子元素
+                for (var i = 0; i < all_content.length; i++) { //历遍所有子元素
+                    if (all_content[i].className == content) { //判断子元素的类名是否等于box
+                        content_array.push(all_content[i]) //在数组后追加元素
+                    }
+                }
+                return content_array;
+            }
+            function min_image_locatin(dec_width, dcontent) {
+                var box_height_array = [];
+                for (var i = 0; i < dcontent.length; i++) { //遍历所有图片
+                    if (i < dec_width) {
+                        box_height_array[i] = dcontent[i].offsetHeight; //取得第一排图片的高度
+                    } else {
+                        var min_height = Math.min.apply(null, box_height_array); //获取第一排图片中高度最小的图片
+                        var min_index = get_min_height(box_height_array, min_height) //函数获得高度最小的图片的位置
+                        dcontent[i].style.position = "absolute"; //绝对定位图片
+                        dcontent[i].style.top = min_height + "px"; //图片距顶部像素
+                        dcontent[i].style.left = dcontent[min_index].offsetLeft + "px"; //图片距左的像素
+                        box_height_array[min_index] = box_height_array[min_index] + dcontent[i].offsetHeight; //最小图片的高度加上在他后面图片的高度
+                    }
+                }
+
+            }
+            function get_min_height(box_height_array, min_height) {
+                for (var i in box_height_array) {
+                    if (box_height_array[i] == min_height) { //循环所有数组的高度 让它等于最小图片的高度 返回i值
+                        return i;
+                    }
+                }
+            }
+        }
+    };
+}]);
+
+$state.go 和 $state.transitionTo 的详细介绍
+https://github.com/angular-ui/ui-router/wiki/Quick-Reference#stateproviderstatestatename-stateconfig

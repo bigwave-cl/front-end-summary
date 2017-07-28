@@ -1,0 +1,1875 @@
+﻿>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+|------->			CSS总结@version1.0	              <------|
+<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
+
+-------------------------------------->
+		CSS3给我们带来了什么？
+<-------------------------------------
+
+CSS3给我们带来了如：
+	文字阴影（text-shadow）、
+	盒子阴影（box-shadow）、
+	圆角（border-radius）、
+	背景渐变（background: linear-gradient(#000, #fff)）、
+	2D变换（transition）、
+	动画（animation）等大家耳熟能详的常用属性外，
+	还有如-webkit-mask、
+	-webkit-text-stroke、
+	-webkit-nbsp-mode、
+	-webkit-tap-highlight-color、
+	-webkit-box-reflect、
+	-webkit-marquee、
+	-webkit-box等webkit内核私有属性
+
+|--------------------------------
+|------------>PX、PT、百分比、EM、REM的简单介绍：
+|-------------------------------------
+
+	我们常用的有px、pt、百分比、em等，很惭愧，我最近才知道有rem，而且是个相当不错的朋友。前面的几个单位大家都比较熟悉，不知道有没有和我一样小白的才知道rem的呢，它是随着css3来到这个世界。
+
+	http://pxtoem.com/（字体单位转换单位网页版）
+
+PX为单位
+	在Web页面初期制作中，我们都是使用“px”来设置我们的文本，因为他比较稳定和精确。但是这种方法存在一个问题，当用户在浏览器中浏览我们制作的Web页面时，他改变了浏览器的字体大小，这时会使用
+我们的Web页面布局被打破。这样对于那些关心自己网站可用性的用户来说，就是一个大问题了。因此，这时就提出了使用“em”来定义Web页面的字体。
+
+em为单位
+	前面也说了，使用是“px”为单位是比较方便，而又一致，但在浏览器中放大或缩放浏览页面时会存在一个问题，要解决这个问题，我们可以使用“em”单位。这种技术需要一个参考点，一般都是以<body>的
+“font-size”为基准。比如说我们使用“1em”等于“10px”来改变默认值“1em=16px”，这样一来，我们设置字体大小相当于“14px”时，只需要将其值设置为“1.4em”。
+
+Rem为单位
+	CSS3的出现，他同时引进了一些新的单位，包括我们今天所说的rem。在W3C官网上是这样描述rem的——“font size of the root element” 。下面我们就一起来详细的了解rem。前面说了“em”是相对于其
+父元素来设置字体大小的，这样就会存在一个问题，进行任何元素设置，都有可能需要知道他父元素的大小，在我们多次使用时，就会带来无法预知的错误风险。而rem是相对于根元素<html>，这样就意味着，我们只需要
+在根元素确定一个参考值，在根元素中设置多大的字体，这完全可以根据您自己的需要：
+	我们来看一个简单的代码实例：
+			html {font-size: 62.5%;/*10 ÷ 16 × 100% = 62.5%*/}
+			body {font-size: 1.4rem;/*1.4 × 10px = 14px */}
+			h1 { font-size: 2.4rem;/*2.4 × 10px = 24px*/}
+	我在根元素<html>中定义了一个基本字体大小为62.5%（也就是10px。设置这个值主要方便计算，如果没有设置，将是以“16px”为基准 ）。从上面的计算结果，我们使用“rem”就像使用“px”一样的方便，
+而且同时解决了“px”和“em”两者不同之处。
+
+浏览器的兼容性
+	rem是CSS3新引进来的一个度量单位，大家心里肯定会觉得心灰意冷呀，担心浏览器的支持情况。其实大家不用害怕，你可能会惊讶，支持的浏览器还是蛮多的，比如：Mozilla Firefox 3.6+、Apple Safari 5+、
+Google Chrome、IE9+和Opera11+。只是可怜的IE6-8无法，你们就把他们当透明了吧，我向来都是如此。
+	不过使用单位设置字体，可不能完全不考虑IE了，如果你想使用这个REM，但也想兼容IE下的效果，可你可考虑“px”和“rem”一起使用，用"px"来实现IE6-8下的效果，然后使用“Rem”来实现代浏览器的效果。
+就让IE6-8不能随文字的改变而改变吧，谁让这个Ie6-8这么老呢？哈。。。。大家不仿试试，还蛮有意思，说不定这个就是主流的度量单位了。
+
+（关于rem的浅谈）
+参考网址：http://isux.tencent.com/web-app-rem.html
+
+(针对HTML5浅谈web移动开发)
+参考网址:http://sc.chinaz.com/info/130410113358.htm
+
+|--------------------------------
+|------------>CSS导入字体库：
+|-------------------------------------
+
+	google的：@import  url(http://fonts.googleapis.com/css?family=*);
+
+|--------------------------------
+|------------>CSS初始化和默认设置：
+|-------------------------------------
+
+	WHY？：为了避免浏览器的差异，我们可以初始化它的设置，因为不同浏览器对margin、padding等的设置是不一样的，所以每次我设计的时候总会总结一下，还有就是有些老版本的浏览器对h5标签兼容性不是很好，所
+以呢我们来对他们做一些设置，具体如下：
+		html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike,
+		strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed, figure, figcaption,
+		footer, header, hgroup, menu, nav, output, ruby, section, summary,time, mark, audio, video{
+			margin: 0;
+			padding: 0;
+			border: 0;
+			font-size: 100%;
+			font: inherit;
+			vertical-align: baseline;
+		}
+		article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+			display: block;
+		}
+		body {
+			line-height: 1;
+		}
+		ol, ul {
+			list-style: none;
+		}
+		blockquote, q {
+			quotes: none;
+		}
+		blockquote:before, blockquote:after,q:before, q:after {
+			content: '';
+			content: none;
+		}
+		table {
+			border-collapse: collapse;
+			border-spacing: 0;
+		}
+
+|--------------------------------
+|------------>CSS符号属性：
+|-------------------------------------
+
+	-------->>>---------列表
+	list-style-type:none; /*不编号*/ 
+	list-style-type:decimal; /*阿拉伯数字*/ 
+	list-style-type:lower-roman; /*小写罗马数字*/ 
+	list-style-type:upper-roman; /*大写罗马数字*/ 
+	list-style-type:lower-alpha; /*小写英文字母*/ 
+	list-style-type:upper-alpha; /*大写英文字母*/ 
+	list-style-type:disc; /*实心圆形符号*/ 
+	list-style-type:circle; /*空心圆形符号*/ 
+	list-style-type:square; /*实心方形符号*/ 
+	list-style-image:url(/dot.gif); /*图片式符号*/ 
+	list-style-position:outside; /*凸排*/ 
+	list-style-position:inside; /*缩进*/ 
+
+	-------->>>---------CSS之background
+	background-color:#F5E2EC; /*背景颜色*/ 
+	background:transparent; /*透视背景*/ 
+	background-image : url(/image/bg.gif); /*背景图片*/ 
+	background-attachment : fixed; /*浮水印固定背景*/ 
+	background-repeat : repeat; /*重复排列-网页默认*/ 
+	background-repeat : no-repeat; /*不重复排列*/ 
+	background-repeat : repeat-x; /*在x轴重复排列*/ 
+	background-repeat : repeat-y; /*在y轴重复排列*/
+	background-position : 90% 90%; /*背景图片x与y轴的位置*/ 
+	background-position : top; /*向上对齐*/ 
+	background-position : buttom; /*向下对齐*/ 
+	background-position : left; /*向左对齐*/ 
+	background-position : right; /*向右对齐*/ 
+	background-position : center; /*居中对齐*/ 
+
+	-------->>>---------CSS之a的连接属性
+	a /*所有超链接*/ 
+	a:link /*超链接文字格式*/ 
+	a:visited /*浏览过的链接文字格式*/ 
+	a:hover a:not(:hover)/*鼠标转到链接*/ 
+	a:active /*按下链接的格式*/ 
+	LoVeHAte
+
+	-------->>>---------CSS之光标属性（鼠标光标样式）
+	cursor:url;
+	url	
+	需使用的自定义光标的 URL。
+	注释：请在此列表的末端始终定义一种普通的光标，以防没有由 URL 定义的可用光标。
+	cursor: url(./favicon.ico),auto;(最好尺寸是32*32的图片)
+	not-allowed 禁用图标
+	default	默认光标（通常是一个箭头）
+	auto	默认。浏览器设置的光标。
+	crosshair	光标呈现为十字线。
+	pointer	光标呈现为指示链接的指针（一只手）
+	move	此光标指示某对象可被移动。
+	e-resize	此光标指示矩形框的边缘可被向右（东）移动。
+	ne-resize	此光标指示矩形框的边缘可被向上及向右移动（北/东）。
+	nw-resize	此光标指示矩形框的边缘可被向上及向左移动（北/西）。
+	n-resize	此光标指示矩形框的边缘可被向上（北）移动。
+	se-resize	此光标指示矩形框的边缘可被向下及向右移动（南/东）。
+	sw-resize	此光标指示矩形框的边缘可被向下及向左移动（南/西）。
+	s-resize	此光标指示矩形框的边缘可被向下移动（南）。
+	w-resize	此光标指示矩形框的边缘可被向左移动（西）。
+	text	此光标指示文本。
+	wait	此光标指示程序正忙（通常是一只表或沙漏）。
+	help	此光标指示可用的帮助（通常是一个问号或一个气球）。
+
+	-------->>>---------CSS之border
+	border-top : 1px solid #6699cc; /*上框线*/ 
+	border-bottom : 1px solid #6699cc; /*下框线*/ 
+	border-left : 1px solid #6699cc; /*左框线*/ 
+	border-right : 1px solid #6699cc; /*右框线*/ 
+	
+	border-top-color : #369 /*设置上框线top颜色*/ 
+	border-top-width :1px /*设置上框线top宽度*/ 
+	border-top-style : solid/*设置上框线top样式*/
+ 	
+	border-style：
+	solid /*实线框*/ 
+	dotted /*虚线框，虚线的点最短*/ 
+	dashed /*虚线框，虚线的点中等*/
+	double /*双线框*/ 
+	groove /*立体内凸框*/ 
+	ridge /*立体浮雕框*/ 
+	inset /*凹框*/ 
+	outset /*凸框*/
+
+	-------->>>---------CSS之margin
+	margin-top:10px; /*上外边距*/ 
+	margin-right:10px; /*右外边距*/ 
+	margin-bottom:10px; /*下外边距*/ 
+	margin-left:10px; /*左外边距*/ 
+
+	-------->>>---------CSS之padding
+	padding-top:10px; /*上内边距*/ 
+	padding-right:10px; /*右内边距*/ 
+	padding-bottom:10px; /*下内边距*/ 
+	padding-left:10px; /*左内边距*/
+
+	-------->>>---------CSS之文字
+	color : #999999; /*文字颜色*/
+	font-family : 宋体,sans-serif; /*文字字体*/ 
+	font-size : 9pt; /*文字大小*/ 
+	font-style:itelic; /*文字斜体*/ 
+	font-variant:small-caps; /*小字体*/ 
+	letter-spacing : 1pt; /*字间距离*/ 
+	line-height : 200%; /*设置行高*/ 
+	font-weight:bold; /*文字粗体*/ 
+
+	text-decoration属性：
+	text-decoration:line-through; /*加删除线*/ 
+	text-decoration:overline; /*加顶线*/ 
+	text-decoration:underline; /*加下划线*/ 
+	text-decoration:none; /*删除链接下划线*/ 
+
+	text-transform属性：
+	text-transform : capitalize; /*首字大写*/ 
+	text-transform : uppercase; /*英文大写*/ 
+	text-transform : lowercase; /*英文小写*/ 
+
+	text-align属性：
+	text-align:right; /*文字右对齐*/ 
+	text-align:left; /*文字左对齐*/ 
+	text-align:center; /*文字居中对齐*/ 
+	text-align:justify; /*文字分散对齐*/ 
+
+	vertical-align属性：
+	vertical-align:baseline	默认。元素放置在父元素的基线上。
+	vertical-align:sub	垂直对齐文本的下标。
+	vertical-align:super	垂直对齐文本的上标
+	vertical-align:top	把元素的顶端与行中最高元素的顶端对齐
+	vertical-align:text-top	把元素的顶端与父元素字体的顶端对齐
+	vertical-align:middle	把此元素放置在父元素的中部。
+	vertical-align:bottom	把元素的顶端与行中最低的元素的顶端对齐。
+	vertical-align:text-bottom	把元素的底端与父元素字体的底端对齐。
+	vertical-align:length	 
+	vertical-align:%	使用 "line-height" 属性的百分比值来排列此元素。允许使用负值。
+	vertical-align:inherit	规定应该从父元素继承 vertical-align 属性的值。
+
+|--------------------------------
+|------------>CSS3.0的transform属性：
+|-------------------------------------
+
+	CSS3.0的transform属性：(有<angle>的值是这样的：180deg有单位的)
+	transform-origin(x,y);/*设置2D图形的元素基点，如果没设置，则默认为中心*/
+	transform:rotate(<angle>);/*2D图形旋转，<angle>为正的度数则顺时针旋转多少度，反之*/
+	transform:trabslate(x,y);/*2D图形移动，分别向设定的x，y值移动多少个像素*/
+	transform:trabslateX(value);/*2D图形平行移动X个像素*/
+	transform:trabslateY(value);/*2D图形垂直移动Y个像素*/
+	transform:scale(x,y);/*2D图形缩放，如果只给一个，两个值都是一样的*/
+	transform:scaleX(value);/*2D图形水平拉伸*/
+	transform:scaleY(value);/*2D图形垂直拉伸*/
+	transform:skew(<angle>,<angle>);/*2D图形扭曲*/
+	transform:skewX(<angle>);/*2D图形水平扭曲*/
+	transform:skewY(<angle>);/*2D图形垂直扭曲*/
+	transform:matrix(a,b,c,d,e,f);/*具体的没弄过*/
+
+|--------------------------------
+|------------>CSS3.0的前缀：
+|-------------------------------------
+
+	CSS3.0的前缀：(为了规定其内核名称好支持部分不兼容的css3.0熟悉)
+	-moz-:Firefox;
+	-webkit-:Safari&Chrome;
+	-o-:Opera;
+	-khtml-:Konqieror;
+	-ms-:Internet Explorer;
+	-chrome-:Google Chrome专用前缀
+
+|--------------------------------
+|------------>CSS的overflow属性：
+|-------------------------------------
+
+	CSS的overflow属性：（属性规定当内容溢出元素框时发生的事情，也就是当内容显示溢出元素内容区时会作何处理）
+	  值     	 |      描述
+	visible   	 |   默认值，内容不会被修剪，会呈现在元素之外
+	hidden      |   内容会被修剪，并且其余内容是不可见的
+	scroll   	 |   内容会被修剪，但是浏览器会显示滚动条以便于查看其余的内容
+	auto      	 |   内容会被修剪，但是浏览器会显示滚动条以便于查看其余的内容
+	inherit  	 |   规定应该从父元素继承overflow属性的值
+
+|--------------------------------
+|------------>CSS的transition（过渡）属性：
+|-------------------------------------
+	
+	transition： transition-property transition-duration transition-function transition-delay;
+	transition-property: 执行变换的属性
+				none：无
+			 	all：所有属性
+			 	indent：元素属性名  例（color等等）
+	transition-duration: 变换延续的时间
+				默认值为0，单位为S（秒）
+	transition-function: 在延续时间段，变换的速率
+				ease（逐渐变慢）
+				ease-in（加速）
+				ease-out（减速）
+				ease-in-out（加速后加速）
+				linear（匀速）
+				cubic-bezier（x1,y1,x2,y2）（自定义，值为0-1的数）
+	transition-delay: 变换的开始时间
+				默认为0，单位位为S(秒) 
+
+|--------------------------------
+|------------>CSS的meta属性：
+|-------------------------------------
+
+	meta的禁止缩放和缩放初始比例等等的一些属性介绍：
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+	width - viewport的宽度 
+	height - viewport的高度
+	initial-scale - 初始的缩放比例
+	minimum-scale - 允许用户缩放到的最小比例
+	maximum-scale - 允许用户缩放到的最大比例
+	user-scalable - 用户是否可以手动缩放 默认是：yes，如果设置为：no就不可以缩放
+
+	<meta name="apple-mobile-web-app-capable" content="yes"><!--WebApp全屏模式 -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black">
+	<meta name="format-detection" content="telephone=no"><!--禁止自动识别为电话号码-->
+	<meta name="format-detection" content="email=no"><!--禁止自动识别邮箱-->
+	<meta name="apple-mobile-web-app-title" content="这是标题名"><!--添加到主屏后的标题-->
+	<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><!--隐藏状态栏/设置状态栏颜色-->
+	<meta name="x5-orientation" content="portrait"><!--微信x5浏览器强制竖屏-->
+	<meta name="x5-fullscreen" content="true"><!--微信x5浏览器强制全屏-->
+	<meta name="x5-page-mode" content="app"><!--微信x5浏览器网页应用模式(定制工具栏,全屏显示)-->
+	<meta name="HandheldFriendly" content="true"><!--针对手持设备优化,主要会针对一些老的不识别viewport的浏览器,比如黑莓-->
+	<meta name="MobileOptimized" content="320"><!--微软的老式浏览器-->
+	<meta name="screen-orientation" content="portrait"><!-- UC浏览器强制竖屏 -->
+	<meta name="x5-orientation" content="portrait"><!-- QQ浏览器强制竖屏 -->
+	<meta name="full-screen" content="yes"><!-- UC浏览器强制全屏 -->
+	<meta name="browsermode" content="application"><!-- UC浏览器应用模式 -->
+	<meta name="msapplication-tap-highlight" content="no"><!-- window phone 点击无高光 -->
+	<meta name="renderer" content="webkit|ie-comp|ie-stand"><!-- 国内各种浏览器使用webkit内核 -->
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"><!--IE以最高级模式渲染文档(使用Chrome Frame渲染) -->
+	<meta name="msapplication-TileColor" content="#000"><!-- windows 8 磁贴颜色 -->
+	<meta http-equiv="Pragma" content="no-cache"><!-- 禁用浏览器缓存 -->
+
+|--------------------------------
+|------------>CSS3.0的animation属性：
+|-------------------------------------
+
+	animation: name duration timing-function delay iteration-count direction fill-mode play-state;
+
+	animation-name		指定要绑定到选择器的关键帧的名称
+	animation-duration		动画指定需要多少秒或毫秒完成
+	animation-timing-function	设置动画将如何完成一个周期
+				linear	动画从头到尾的速度是相同的。
+				ease	默认。动画以低速开始，然后加快，在结束前变慢。
+				ease-in	动画以低速开始。
+				ease-out	动画以低速结束。
+				ease-in-out	动画以低速开始和结束。	
+				cubic-bezier(n,n,n,n)	在 cubic-bezier 函数中自己的值。可能的值是从 0 到 1 的数值。
+	animation-delay		设置动画在启动前的延迟间隔。
+	animation-iteration-count	定义动画的播放次数。
+	animation-direction	指定是否应该轮流反向播放动画。
+				normal	默认值。动画按正常播放。
+				reverse	动画反向播放。
+				alternate	动画在奇数次（1、3、5...）正向播放，在偶数次（2、4、6...）反向播放。
+				alternate-reverse	动画在奇数次（1、3、5...）反向播放，在偶数次（2、4、6...）正向播放。
+				initial	设置该属性为它的默认值。	
+				inherit	从父元素继承该属性。
+	animation-fill-mode: 	none|forwards|backwards|both|initial|inherit;把物体动画地从一个地方移动到另一个地方，并让它停留在那里
+				none	默认值。动画在动画执行之前和之后不会应用任何样式到目标元素。
+				forwards	在动画结束后（由 animation-iteration-count 决定），动画将应用该属性值。
+				backwards	动画将应用在 animation-delay 定义期间启动动画的第一次迭代的关键帧中定义的属性值。这些都是 from 关键帧中的值（当 animation-direction 为 
+						"normal" 或 "alternate" 时）或 to 关键帧中的值（当 animation-direction 为 "reverse" 或 "alternate-reverse" 时）。
+				both	动画遵循 forwards 和 backwards 的规则。也就是说，动画会在两个方向上扩展动画属性。
+				initial	设置该属性为它的默认值。请参阅 initial。
+				inherit	从父元素继承该属性。请参阅 inherit
+	animation-iteration-count: 	value;
+				n	一个数字，定义应该播放多少次动画
+				infinite	指定动画应该播放无限次（永远）
+	animation-play-state: 	paused|running;
+				paused	指定暂停动画
+				running	指定正在运行的动画
+
+|--------------------------------
+|------------>CSS屏蔽输入：
+|-------------------------------------
+
+	<input name="ly_qq" type="text" tabindex="2" onMouseOver="this.className='input_1'" onMouseOut="this.className='input_2'" 
+	value="123456789" disabled="true"　readOnly="true" /> 
+
+	disabled="true" 此果文字会变成灰色，不可编辑。 
+	readOnly="true" 文字不会变色，也是不可编辑的
+
+	css屏蔽输入：<input style="ime-mode: disabled"> 
+
+|--------------------------------
+|------------>CSS3.0的filter属性：
+|-------------------------------------
+
+	css3.0的filter属性：
+	-webkit-filter: blur(2px) grayscale(1);
+	-moz-filter: blur(2px) grayscale(1);
+	-o-filter: blur(2px) grayscale(1);
+	-ms-filter: blur(2px) grayscale(1);
+	filter: blur(2px) grayscale(1);
+
+	其默认值是none，他不具备继承性，其中filter-function一个具有以下值可选：
+	grayscale灰度---->使用这个特效，会把图片变成灰色的，也就是说你的图片将只有两种颜色“黑色”和“白色” grayscale(1)
+	sepia褐色---->sepia不知道如何译，暂时就叫他“褐色”，使用这种效果，你的图片好像很古老的一样       sepia(1);
+	saturate饱和度---->saturat是用来改变图片的饱和度             saturate(0.5);
+	hue-rotate色相旋转---->hue-rotate用来改变图片的色相     hue-rotate(90deg);  
+	invert反色---->invert做出来的效果就像是我们照相机底面的效果一样     invert(1);
+	opacity透明度---->这个就很好理解了，改变图片的透明度     opacity(.2);
+	brightness亮度---->改变图片的亮度        brightness(.5);
+	contrast对比度---->改变图片的对比度       contrast(2);
+	blur模糊---->改变图片的清晰度          blur(2px)
+	drop-shadow阴影                       drop-shadow(5px 5px 5px #ccc);
+
+|--------------------------------
+|------------>CSS3.0鼠标双击后选中的背景颜色:
+|-------------------------------------
+	css3.0鼠标双击后选中的背景颜色
+	::selection {
+	background:transparent; 
+	}
+	::-moz-selection {
+	background:transparent; 
+	}
+	::-webkit-selection {
+	background:transparent; 
+	}
+
+|--------------------------------
+|------------>base标签:
+|-------------------------------------
+
+	<base> 标签为页面上的所有链接规定默认地址或默认目标。
+	通常情况下，浏览器会从当前文档的 URL 中提取相应的元素来填写相对 URL 中的空白。
+	使用 <base> 标签可以改变这一点。浏览器随后将不再使用当前文档的 URL，而使用指定的基本 URL 来解析所有的相对 URL。这其中包括 <a>、<img>、<link>、<form> 标签中的 URL。
+	_blank
+	_parent
+	_self
+	_top
+	framename
+	ex:	html5.0的iframe标签的打开方式：
+	在子框网页的<head>标签中加<base target="_blank">
+	这样网页内所有链接都在新窗口打开：
+	<head>
+	<base target="_blank">
+	</head>
+	若是要在同一页面打开则是在子框网页的<head>标签中加<base target="_parent">
+
+|--------------------------------
+|------------>CSS的滤镜效果：
+|-------------------------------------
+
+	css的滤镜效果：
+	IE4.0以上支持的滤镜属性表 
+	滤镜效果 描述 ：
+
+	Alpha 设置透明度 
+	Blru 建立模糊效果 
+	Chroma 把指定的颜色设置为透明 
+	DropShadow 建立一种偏移的影象轮廓，即投射阴影 
+	FlipH 水平反转 
+	FlipV 垂直反转 
+	Glow 为对象的外边界增加光效 
+	Grayscale 降低图片的彩色度 
+	Invert 将色彩、饱和度以及亮度值完全反转建立底片效果 
+	Light 在一个对象上进行灯光投影 
+	Mask 为一个对象建立透明膜 
+	Shadow 建立一个对象的固体轮廓，即阴影效果 
+	Wave 在X轴和Y轴方向利用正弦波纹打乱图片 
+	Xray 只显示对象的轮廓 
+
+	1、Alpha 滤镜 
+	语法：{FILTER：ALPHA(opacity=opacity,finishopacity=finishopacity,style=style,startx=startx, starty=starty,finishx=finishx,finishy=finishy)} 
+
+	Alpha属性是把一个目标元素与背景混合。设计者可以指定数值来控制混合的程度。这种“与背景混合”通俗地说就是一个元素的透明度。
+	通过指定坐标，可以指定点、线、面的透明度。他们的参数含义分别如下：
+	"opacity"代表透明度水准。默认的范围是从0 到 100，他们其实是百分比的形式。也就是说，0代表完全透明，100代表完全不透明。
+	"finishopacity"是一个可选参数，如果想要设置渐变的透明效果，就可以使用他们来指定结束时的透明度。范围也是0 到 100。
+	"style"参数指定了透明区域的形状特征。其中0代表统一形状、1代表线形、2代表放射状、3代表长方形。
+	"STARTX"和"STARTY"代表渐变透明效果的开始X和Y坐标。
+	"FINISHX"和"FINISHY"代表渐变透明效果结束X和Y 的坐标。 
+
+	2、Blur 滤镜
+	语法：对于HTML：{filter:blur(add=add,direction=direction,strength=strength)} 
+	对于Script语言： [oblurfilter=] object.filters.blur 
+	用手指在一幅尚未干透的油画上迅速划过时，画面就会变得模糊。”Blur'就是产生同样的模糊效果。 
+	"ADD"参数是一个布尔判断“TRUE（默认）”或者“FALSE”。它指定图片是否被改变成印象派的模糊效果。模糊效果是按顺时针的方向进行的，
+	"DIRECTION"参数用来设置模糊的方向。其中0度代表垂直向上，然后每45度为一个单位。它的默认值是向左的270度。
+	"STRENGTH"值只能使用整数来指定，她代表有多少像素的宽度将受到模糊影响。默认是5个。
+
+	3、FlipH, FlipV 滤镜 
+	语法：{filter:filph} ,{filter:filpv} 分别是水平反转和垂直反转
+
+	4、Chroma 滤镜 
+	语法：{filter:chroma(color=color)} 
+	使用"Chroma"属性可以设置一个对象中指定的颜色为透明色，参数COLOR即要透明的颜色。可以屏蔽颜色，大有用处。
+	filter:chroma(color=#CC33C2)让颜色#CC33C2透明
+
+	5、DropShadow 滤镜 
+	语法：{filter:dropshadow(color=color,offx=ofx,offy=offy,positive=positive)} 
+	"DropShaow"顾名思义就是添加对象的阴影效果。其工作原理是建立一个偏移量，加上较深。
+	"Color"代表投射阴影的颜色，"offx"和"offy"分别是X方向和Y方向阴影的饿偏移量。
+	"Positive"参数是一个布尔值，如果为"TRUE（非0）"，那么就为任何的非透明像素建立可见的投影。如果为"FASLE（0）"，那么就为透明的像素部分建立透明效果 代码如下：
+	dropshadow(color=gray,offx=5,offy=5.positive=0) 
+
+	6、Glow 滤镜 
+	语法：{filter:glow(color=color,strength)} 
+	当对一个对象使用"glow"属性后，这个对象的边缘就会产生类似发光的效果。
+	"COLOR"是指定发光的颜色，
+	"STRENGTH"则是强度的表现，可以从1到255之间的任何整数来指定这个力度。 
+
+	7、Gray ,Invert,Xray 滤镜
+	语法：{filter:gray} ,{filter:invert},{filter:xray} 
+	Gray滤镜是把一张图片变成灰度图；（汶川大地震后很多网站色调都变灰色，就是用的这一点代码实现的）
+	Invert滤镜是把对象的可视化属性全部翻转，包括色彩、饱和度、和亮度值；
+	Xray滤镜是让对象反映出它的轮廓并把这些轮廓加亮，也就是所谓的“X”光片。 
+
+	8、Light 滤镜 
+	语法：Filter{light} 
+	这个属性模拟光源的投射效果。一旦为对象定义了“LIGHT'滤镜属性，那么就可以调用它的“方法(Method)'来设置或者改变属性。“LIGHT'可用的方法有： 
+	·AddAmbient 加入包围的光源 
+	·AddCone 加入锥形光源 
+	·AddPoint 加入点光源 
+	·Changcolor 改变光的颜色 
+	·Changstrength 改变光源的强度 
+	·Clear 清除所有的光源 
+	·MoveLight 移动光源
+	addAmbient (iRed,iGreen,iBlue,iStrength) : 为滤镜添加环境光。环境光是无方向的，并且均匀的洒在页面的表面。环境光有颜色和强度值，可以为对象田家更多的颜色。它通常和其他光一起使用。无返回值。参数见下表。
+	iRed : 必选项。整数值(Integer)。 指定红色值。取值范围为 0 - 255 。 
+	iGreen : 必选项。整数值(Integer)。 指定绿色值。取值范围为 0 - 255 。 
+	iBlue : 必选项。整数值(Integer)。 指定蓝色值。取值范围为 0 - 255 。 
+	iStrength : 必选项。整数值(Integer)。 指定光强度。取值范围为 0 - 100 。
+	changeColor (iLightNumber,iRed,iGreen,iBlue,fAbsolute) : 改变光的颜色。无返回值。参数见下表。
+	iLightNumber : 必选项。整数值(Integer)。 指定光的标识符。 
+	iRed : 必选项。整数值(Integer)。指定红色值。取值范围为 0 - 255 。 
+	iGreen : 必选项。整数值(Integer)。指定绿色值。取值范围为 0 - 255 。 
+	iBlue : 必选项。整数值(Integer)。指定蓝色值。取值范围为 0 - 255 。 
+	fAbsolute : 必选项。布尔值(Boolean)。指定改变是替换当前设置的绝对值，还是加到当前设置的相对值。此参数不等于零表示采用绝对值。否则表示采用相对值。
+	可以定义光源的虚拟位置，以及通过调整X轴和Y轴的数值来控制光源焦点的位置，还可以调整光源的形式（点光源或者锥形光源）指定光源是否模糊边界、光源的颜色、亮度等属性。如果动态的设置光源，可能回产生一些意想不到的效果。
+	实现图片自动变色效果
+	<div><img src="image/ch2.gif" style="filter:light(); width:400; height:300" onload="javascript:this.filters.light.addAmbient(10,250,100,55)"  
+			onmousemove="javascript:this.filters.light.changeColor(0,150,100,50,0)"/></div><br /><br /></div>
+
+	9、Mask 滤镜 
+	语法：{filter:mask(color=color)} 
+	使用'MASK'属性可以为对象建立一个覆盖于表面的膜，其效果就象戴者有色眼镜看物体一样。
+	
+	10、Shadow 滤镜
+	语法：{filter:shadow(color=color,direction=direction)} 
+	利用“Shadow”属性可以在指定的方向建立物体的投影，COLOR是投影色，DIRECTION是设置投影的方向。其中0度代表垂直向上，然后每45度为一个单位。它的默认值是向左的270度。 
+	filter:shadow(color=red,direction=225) 
+	filter:shadow(color=blue,direction=225) 
+	filter:shadow(color=gray,direction=225) 
+
+	11、Wave 滤镜 语法：{filter:wave(add=add,freq=freq,lightstrength=strength,phase=phase,strength=strength)} 
+	filter:wave(add=add,freq=freq,lightstrength=strength,phase=phase,strength=20);
+	"wave"属性把对象按垂直的波形样式打乱。默认是"TRUE（非0）"， 
+	"ADD"表示是否要把对象按照波形样式打乱， 
+	"FREQ"是波纹的频率，也就是指定在对象上一共需要产生多少个完整的波纹， 
+	"LIGHTSTRENGTH"参数可以对于波纹增强光影的效果，范围0----100， 
+	"PHASE"参数用来设置正弦波的偏移量。 
+	"STRENGTH"代表振幅大小。
+
+	摘自：http://www.cnblogs.com/shiyangxt/archive/2008/11/16/1334633.html
+
+|--------------------------------
+|------------>CSS3.0的box-shadow属性：
+|-------------------------------------
+
+	box-shadow: h-shadow v-shadow blur spread color inset;
+	h-shadow	必需。水平阴影的位置。允许负值。
+	v-shadow		必需。垂直阴影的位置。允许负值。
+	blur		可选。模糊距离。
+	spread		可选。阴影的尺寸。
+	color		可选。阴影的颜色。
+	inset		可选。将外部阴影 (outset) 改为内部阴影。
+
+|--------------------------------
+|------------>CSS3.0的属性设置select样式为空：
+|-------------------------------------
+
+	appearance:none;
+	-o-appearance:none; 
+	-ms-appearance:none;
+	-moz-appearance:none;
+	-webkit-appearance:none;
+
+|--------------------------------
+|------------>清除浮动：
+|-------------------------------------
+
+	使用after伪类
+	这种方法就是对父容器使用after伪类和内容声明在指定的现在内容末尾添加新的内容。经常的做法就是添加一个“点”，因为它比较小不太引人注意。然后我们再利用它来清除浮动（闭合浮动元素），
+	并隐藏这个内容。这种方法兼容性一般，但经过各种 hack 也可以应付不同浏览器了，同时又可以保证html比较干净。
+	#outer:after{
+	content:".";
+	height:0;
+	visibility:hidden;
+	display:block;
+	clear:both;
+	}
+
+|--------------------------------
+|------------>DIV垂直水平居中：
+|-------------------------------------
+
+	怎样使一个层垂直居中于浏览器中这里我们使用百分比绝对定位,与外补丁负值的方法,负值的大小为其自身宽度高度除以二 
+	<style type="text/css"> 
+	<!-- div { position:absolute; top:50%; lef:50%; margin:-100px 0 0 -100px;
+                                               width:200px; height:200px; border:1px solid red; }
+	 --> </style> 
+
+|--------------------------------
+|------------>CSS背景渐变：
+|-------------------------------------
+
+	上至下：
+   	 background: rgb(255, 255, 255);
+    	background: -moz-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 1)), color-stop(47%, rgba(246, 246, 246, 1)), color-stop(100%, rgba(237, 237, 237, 1)));
+    	background: -webkit-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    	background: -o-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    	background: -ms-linear-gradient(top, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    	background: linear-gradient(to bottom, rgba(255, 255, 255, 1) 0%, rgba(246, 246, 246, 1) 47%, rgba(237, 237, 237, 1) 100%);
+    	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#ededed', GradientType=0);
+
+	左至右：
+   	background: -moz-linear-gradient(left,  rgba(44,224,98,1) 0%, rgba(125,185,232,0) 100%); /* FF3.6+ */
+    	background: -webkit-gradient(linear,left, color-stop(0%,rgba(44,224,98,1)), color-stop(100%,rgba(125,185,232,0))); /* Chrome,Safari4+ */
+    	background: -webkit-linear-gradient(left,  rgba(44,224,98,1) 0%,rgba(125,185,232,0) 100%); /* Chrome10+,Safari5.1+ */
+   	background: -o-linear-gradient(left,  rgba(44,224,98,1) 0%,rgba(125,185,232,0) 100%); /* Opera 11.10+ */
+    	background: -ms-linear-gradient(left,  rgba(44,224,98,1) 0%,rgba(125,185,232,0) 100%); /* IE10+ */
+    	background: linear-gradient(left,  rgba(44,224,98,1) 0%,rgba(125,185,232,0) 100%); /* W3C */
+    	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#2ce062', endColorstr='#007db9e8',GradientType=0 ); /* IE6-8 */
+    	filter: none\9\0;/*ie9*/
+
+	上至下：
+    	background: rgb(250,170,110);
+    	background: -moz-linear-gradient(top,  rgba(250,170,110,1) 0%, rgba(219,100,50,1) 100%); /* FF3.6+ */
+    	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(250,170,110,1)), color-stop(100%,rgba(219,100,50,1))); /* Chrome,Safari4+ */
+    	background: -webkit-linear-gradient(top,  rgba(250,170,110,1) 0%,rgba(219,100,50,1) 100%); /* Chrome10+,Safari5.1+ */
+    	background: -o-linear-gradient(top,  rgba(250,170,110,1) 0%,rgba(219,100,50,1) 100%); /* Opera 11.10+ */
+    	background: -ms-linear-gradient(top,  rgba(250,170,110,1) 0%,rgba(219,100,50,1) 100%); /* IE10+ */
+    	background: linear-gradient(top,  rgba(250,170,110,1) 0%,rgba(219,100,50,1) 100%); /* W3C */
+    	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FAAA6E', endColorstr='#DB6432',GradientType=0 ); /* IE6-8 */
+    	filter: none\9\0;/*ie9*/
+
+	背景渐变方式：
+	background:red; /* 一些不支持背景渐变的浏览器 */  
+	background:-moz-linear-gradient(top, red, rgba(0, 0, 255, 0.5));  
+	background:-webkit-gradient(linear, 0 0, 0 bottom, from(#ff0000), to(rgba(0, 0, 255, 0.5)));  
+	background:-o-linear-gradient(top, red, rgba(0, 0, 255, 0.5)); 
+	filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);
+	-ms-filter:alpha(opacity=100 finishopacity=50 style=1 startx=0,starty=0,finishx=0,finishy=150) progid:DXImageTransform.Microsoft.gradient(startcolorstr=red,endcolorstr=blue,gradientType=0);/*IE8*/
+
+	一. Webkit浏览器
+
+	(1) 第一种写法：
+	background:-webkit-gradient(linear ,10% 10%，100% 100%，
+	color-stop(0.14,rgb(255,0,0)),
+	color-stop(0.5,rgb(255,255,0)),
+	color-stop(1,rgb(0,0,255)) );
+	第一个参数：表示的是渐变的类型
+	linear线性渐变
+	第二个参数：分别对应x，y方向渐变的起始位置
+	第三个参数：分别对应x，y方向渐变的终止位置
+	第四/五/N个参数：设置渐变的位置及颜色
+
+	(2)第二种写法：这种写法比较简单，而且效果比较自然
+	background:-webkit-gradient(linear, 0 0, 0 100%, from(＃2074af), to(＃2c91d2));
+	第一个参数：表示的是渐变的类型
+	linear线性渐变
+	第二个参数：分别对应x，y方向渐变的起始位置
+	第三个参数：分别对应x，y方向渐变的终止位置
+	第四个参数：设置了起始位置的颜色
+	第五个参数：设置了终止位置的颜色
+
+	二.Mozilla浏览器
+
+	(1)第一种写法：
+	background:-moz-linear-gradient(10 10 90deg,
+	rgb(25,0,0) 14%,
+	rgb(255,255,0) 50%,
+	rgb(0,0,255) 100%);
+	第一个参数：设置渐变起始位置及角度
+	第二/三/四/N个参数：设置渐变的颜色和位置
+
+	(2)第二种写法：这种写法比较简单，而且效果比较自然
+	background:-moz-linear-gradient(top, ＃FFC3C8,＃FF9298);
+	第一个参数：设置渐变的起始位置
+	第二个参数：设置起始位置的颜色
+	第三个参数：设置终止位置的颜色
+
+	三.IE 浏览器
+
+	IE浏览器实现渐变只能使用IE自己的滤镜去实现
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=＃00ffff,endColorstr=＃9fffff,grandientType=1);
+	第一个参数：渐变起始位置的颜色
+	第二个参数：渐变终止位置的颜色
+	第三个参数：渐变的类型
+	0 代表竖向渐变        1  代表横向渐变
+	P.S.这里设置背景的时候不需要给background设置，直接用filter即可，不要和其他的浏览器混淆
+	
+	从上往下渐变：
+	background: rgb(54,173,250);
+	background: -moz-linear-gradient(top,  rgba(54,173,250,1) 0%, rgba(255,255,255,1) 50%, rgba(54,173,250,1) 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(54,173,250,1)), color-stop(50%,rgba(255,255,255,1)), color-stop(50%,rgba(54,173,250,1)));
+	background: -webkit-linear-gradient(top,  rgba(54,173,250,1) 0%,rgba(255,255,255,1) 50%,rgba(54,173,250,1) 100%);
+	background: -o-linear-gradient(top,  rgba(54,173,250,1) 0%,rgba(255,255,255,1) 50%,rgba(54,173,250,1) 100%);
+	background: -ms-linear-gradient(top,  rgba(54,173,250,1) 0%,rgba(255,255,255,1) 50%,rgba(54,173,250,1) 100%);
+	background: linear-gradient(to bottom,  rgba(54,173,250,1) 0%,rgba(255,255,255,1) 50%,rgba(54,173,250,1) 100%);
+        	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BD8FAC,endColorstr=#A9A4BB,grandientType=0);
+
+	从左往右渐变：
+	background: rgb(189,143,172);
+        	background:-webkit-gradient(linear,0 50%,100% 50%,from(rgba(189,143,172,1)),to(rgba(169,164,187,1)));/*Old gradient for webkit*/
+        	background:-webkit-linear-gradient(left,rgba(189,143,172,1),rgba(169,164,187,1));/*new gradient for Webkit*/
+        	background:-moz-linear-gradient(left,rgba(189,143,172,1),rgba(169,164,187,1));/*Mozilla*/
+       	background:-ms-linear-gradient(to right,  rgba(189,143,172,1) 0%,rgba(169,164,187,1) 100%);
+        	background:-o-linear-gradient(left,rgba(189,143,172,1),rgba(169,164,187,1)); /*Opera11*/
+        	background:linear-gradient(to right,rgba(189,143,172,1) 0%,rgba(169,164,187,1) 100%);
+        	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#BD8FAC,endColorstr=#A9A4BB,grandientType=1);
+
+	径向渐变：
+	background: -moz-radial-gradient(30px 30px, circle farthest-corner, #58ff00 0%, rgba(222, 255, 0, 0) 30%),
+	-moz-radial-gradient(50px 70px, circle farthest-corner, #F30 0%, rgba(255, 159, 34, 0) 60%),
+	-moz-radial-gradient(80px 10px, circle farthest-corner, #03F 0%, rgba(222, 255, 0, 0) 80%);
+	background:-webkit-gradient(radial, 105 105, 20, 112 120, 50, from(#ff5f98), to(rgba(255,1,136,0)), color-stop(75%, #ff0188)),
+	-webkit-gradient(radial, 95 15, 15, 102 20, 40, from(#00c9ff), to(rgba(0,201,255,0)), color-stop(80%, #00b5e2)),
+	-webkit-gradient(radial, 0 150, 50, 0 140, 90, from(#f4f201), to(rgba(228, 199,0,0)), color-stop(80%, #e4c700));
+	circle farthest-corner圆形渐变，ellipse farthest-corner椭圆渐变
+
+|--------------------------------
+|------------>CSS改变input的placeholder的颜色：
+|-------------------------------------
+
+	改变input的placeholder方法：
+	因为每个浏览器的CSS选择器都有所差异，所以需要针对每个浏览器做单独的设定(可以在冒号前面写input和textarea)。
+　　	&::-webkit-input-placeholder {
+                /* WebKit browsers */
+                color: #999;
+            }
+            &:-moz-placeholder {
+                /* Mozilla Firefox 4 to 18 */
+                color: #999;
+            }
+            &::-moz-placeholder {
+                /* Mozilla Firefox 19+ */
+                color: #999;
+            }
+            &:-ms-input-placeholder {
+                /* Internet Explorer 10+ */
+                color: #999;
+            }
+	还可以写成下面这样：
+　　	input::-webkit-input-placeholder, textarea::-webkit-input-placeholder {
+　　		color: #666;
+　　	}
+　　	input:-moz-placeholder, textarea:-moz-placeholder {
+　　		color:#666;
+　　	}
+　　	input::-moz-placeholder, textarea::-moz-placeholder {
+　　		color:#666;
+　　	}
+　　	input:-ms-input-placeholder, textarea:-ms-input-placeholder {
+　　		color:#666;
+　　	}
+
+|--------------------------------
+|------------>CSS3.0的webkit：
+|-------------------------------------
+
+	CSS3里面加入了一个“-webkit-font-smoothing”属性。这个属性可以使页面上的字体抗锯齿,使用后字体看起来会更清晰舒服。加上之后就顿时感觉页面小清晰了。
+	CSS3 改变空格作用 -webkit-nbsp-mode 去掉点击框 -webkit-tap-highlight-color
+	-webkit-nbsp-mode
+	换行有时是很棘手的事情：有时你希望文字在适当的地方断行(而不是折行)，有时你又不想这样。一个能控制这个的属性就是
+	-webkit-nbsp-mode，它让你可以改变&nbsp;空白符的行为，强制文字在它被用到的地方断行。通过设置值为space即可实现。
+
+	-webkit-tap-highlight-color
+	这个属性只用于iOS (iPhone和iPad)。当你点击一个链接或者通过Javascript定义的可点击元素的时候，它就会出现一个半透明的灰色背景。
+	要重设这个表现，你可以设置-webkit-tap-highlight-color为任何颜色。
+	想要禁用这个高亮，设置颜色的alpha值为0即可。
+	示例：设置高亮色为50%透明的红色:
+	-webkit-tap-highlight-color: rgba(255,0,0,0.5);
+	浏览器支持: 只有iOS(iPhone和iPad).
+
+|--------------------------------
+|------------>关于ie兼容：
+|-------------------------------------
+
+	color:blue;//所有浏览器
+	color:brown\9;//所有IE浏览器
+	+color:red;//IE7
+	_color:green;//IE6
+
+
+|--------------------------------
+|------------>自定义font：
+|-------------------------------------
+
+	关于字体@font-face的兼容：
+  	 @font-face {
+		font-family: 'YourWebFontName';
+		src: url('YourWebFontName.eot'); /* IE9 Compat Modes */
+		src: url('YourWebFontName.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+             		url('YourWebFontName.woff') format('woff'), /* Modern Browsers */
+            		url('YourWebFontName.ttf')  format('truetype'), /* Safari, Android, iOS */
+             		url('YourWebFontName.svg#YourWebFontName') format('svg'); /* Legacy iOS */
+   	}
+
+|--------------------------------
+|------------>CSS3 :nth-child() 选择器：
+|-------------------------------------
+
+	1、规定属于其父元素的第二个子元素的每个 p 的背景色：
+	p:nth-child(2){
+		background:#ff0000;
+	}
+
+	2、Odd 和 even 是可用于匹配下标是奇数或偶数的子元素的关键词（第一个子元素的下标是 1）。在这里，我们为奇数和偶数 p 元素指定两种不同的背景色：
+	p:nth-child(odd){
+		background:#ff0000;
+	}
+	p:nth-child(even){
+		background:#0000ff;
+	}
+
+	3、使用公式 (an + b)。描述：表示周期的长度，n 是计数器（从 0 开始），b 是偏移值。在这里，我们指定了下标是 3 的倍数的所有 p 元素的背景色：
+	p:nth-child(3n+0){
+		background:#ff0000;
+	}
+
+|--------------------------------
+|------------>H5黑科技：
+|-------------------------------------
+
+	类似于select标签的书写格式（h5）：
+	<input list="Country">
+	<datalist id="Country">
+  		<option value="India">
+  		<option value="Italy">
+  		<option value="Iran">
+  		<option value="Israel">
+  		<option value="Indonesia">
+	</datalist>
+
+
+|--------------------------------
+|------------>H5的type新属性：
+|-------------------------------------
+
+	如果你想显示颜色选择对话框
+	<input type="color" name="favcolor">
+
+	如果你想显示日历对话框
+	<input type="date" name="bday">
+
+	如果你想显示含有本地时间的日历
+	<input type="datetime-local" name="bdaytime">
+
+	如果你想用文本展示数字范围，你可以设置类型为“number”
+	<input type="number" name="quantity" min="1" max="5">
+
+	如果你想显示范围控制，你可以使用类型”range”
+	<input type="range" min="0" max="10" step="2" value="6">
+
+	想让文本框作为搜索引擎
+	<input type="search" name="googleengine">
+
+	想只能输入时间
+	<input type="time" name="usr_time">
+
+	如果你想使用文本框接受电话号码
+	<input type="tel" name="mytel">
+
+|--------------------------------
+|------------>H5的列布局：
+|-------------------------------------
+
+	为了实现列布局我们需要指定以下内容
+
+	我们需要把text划分为多少列
+	指定列数我们需要使用column-count，对于Chrome和firefox分别需要”webkit”和“moz-column”
+	-moz-column-count:3; /* Firefox */
+	-webkit-column-count:3; /* Safari and Chrome */
+	column-count:3;
+
+	两列之间我们想要多少差距
+	-moz-column-gap:40px; /* Firefox */
+	-webkit-column-gap:40px; /* Safari and Chrome */
+	column-gap:20px;
+
+	你想在这些列之间画一条线么？如果是，那么多厚呢？
+	-moz-column-rule:4px outset #ff00ff; /* Firefox */
+	-webkit-column-rule:4px outset #ff00ff; /* Safari and Chrome */
+	column-rule:6px outset #ff00ff;
+
+	以下是完整代码
+	<style>
+	.magazine{
+		-moz-column-count:3; /* Firefox */
+		-webkit-column-count:3; /* Safari and Chrome */
+		column-count:3;
+		-moz-column-gap:40px; /* Firefox */
+		-webkit-column-gap:40px; /* Safari and Chrome */
+		column-gap:20px;	
+		-moz-column-rule:4px outset #ff00ff; /* Firefox */
+		-webkit-column-rule:4px outset #ff00ff; /* Safari and Chrome */
+		column-rule:6px outset #ff00ff;
+	}
+	</style>
+
+	你可以使用class属性来应用样式到文本
+	<div class="magazine">
+		Your text goes here which you want to divide in to 3 columns.
+	</div>
+
+|--------------------------------
+|------------>local storage：
+|-------------------------------------
+
+	HTML5中的本地存储概念是什么？
+		很多时候我们会存储用户本地信息到电脑上，例如：比方说用户有一个填充了一半的长表格，然后突然网络连接断开了，这样用户希望你能存储这些信息到本地，当网络恢复的时候，他想获取这些信息然后发送到服务器进行存储
+	现代浏览器拥有的存储被叫做“Local Storage”,你可以存储这些信息。
+
+	我们如何从本地存储中添加和移除数据？
+	数据添加到本地存储采用键值对，以下示例显示了城市数据”India”添加了键”Key001”
+	localStorage.setItem(“Key001”,”India”);
+	从本地存储中检索数据我们可以提供键名并使用”getItem”方法
+	var country = localStorage.getItem(“Key001”);
+	你也可以使用以下代码，存储Javascript对象在本地存储中
+	var country = {};
+	country.name = “India”;
+	country.code = “I001”;
+	localStorage.setItem(“I001”, country);
+	var country1 = localStorage.getItem(“I001”);
+	如果你想存储Json格式，你可以使用“JSON.stringify”方法，如下所示：
+	localStorage.setItem(“I001”,JSON.stringify(country));
+
+	本地存储的生命周期是什么？
+	本地存储没有生命周期，它将保留知道用户从浏览器清除或者使用Javascript代码移除。
+
+|--------------------------------
+|------------>HTML5新标签：
+|-------------------------------------
+	<article>、	//标签是用来定义一些来自外部的内容。比如一些网友的投稿或是新闻记者的文章或是摘取某博客、论坛的信息，以及其他媒介资料。
+	<aside>、		//<aside> 标签定义 <article> 标签外的内容。aside 的内容应该与附近的内容相关。
+	<header>、	//<header> 标签定义文档或者文档的一部分区域的页眉。<header> 元素应该作为介绍内容或者导航链接栏的容器。
+	      	  	 在一个文档中，您可以定义多个 <header> 元素。 注释：<header> 标签不能被放在 <footer>、<address> 或者
+	      	   	 另一个 <header> 元素内部。
+	<footer>、	//<footer> 标签定义文档或者文档的一部分区域的页脚。<footer> 元素应该包含它所包含的元素的信息。在典型情况
+	    	   	下，该元素会包含文档创作者的姓名、文档的版权信息、使用条款的链接、联系信息等等。在一个文档中，您可以定义
+	   	   	多个 <footer> 元素。
+	<audio>、	//<audio> 标签定义声音，比如音乐或其他音频流。目前，<audio> 元素支持的3种文件格式：MP3、Wav、Ogg。
+	<canvas>、	//<canvas> 标签通过脚本（通常是 JavaScript）来绘制图形（比如图表和其他图像）。<canvas> 标签只是图形容器，
+		      	   您必须使用脚本来绘制图形。
+	<command>、	//<command> 标签可以定义用户可能调用的命令（比如单选按钮、复选框或按钮）。当使用 <menu> 元素时，
+		           	   command 元素将作为菜单或者工具栏的一部分显示出来。但是，用 command 规定键盘快捷键时，command
+		           	   元素能被放置在页面的任何位置，但元素不可见。ps:目前只有IE9支持此标签
+	<datalist>、	//<datalist> 标签规定了 <input> 元素可能的选项列表。<datalist> 标签被用来在为 <input> 元素提供"自动完成"的特性。
+			   用户能看到一个下拉列表，里边的选项是预先定义好的，将作为用户的输入数据。	
+			   请使用 <input> 元素的 list 属性来绑定 <datalist> 元素。
+	<details>、	//<details> 标签规定了用户可见的或者隐藏的需求的补充细节。<details> 标签用来供用户开启关闭的交互式控件。任何形
+			   式的内容都能被放在 <details> 标签里边。<details> 元素的内容对用户是不可见的，除非设置了 open 属性。ps：目前只有
+			   chrome和safari6支持此标签
+	<embed>、	//<embed> 标签定义了一个容器，用来嵌入外部应用或者互动程序（插件）。
+	<figcaption>、	//<figcaption> 标签为 <figure> 元素定义标题。<figcaption> 元素应该被置于 <figure> 元素的第一个或最后一个子元素的位置。
+	<figure>、	//<figure> 标签规定独立的流内容（图像、图表、照片、代码等等）。<figure> 元素的内容应该与主内容相关，同时元素的位置相对
+			   于主内容是独立的。如果被删除，则不应对文档流产生影响。
+	<hgroup>、	//<hgroup> 标签被用来对标题元素进行分组。当标题有多个层级（副标题）时，<hgroup> 元素被用来对一系列 <h1> - <h6> 元素进行分组。
+	<mark>、		//<mark> 标签定义带有记号的文本。请在需要突出显示文本时使用 <mark> 标签。
+	<meter>、	//<meter> 标签定义度量衡。仅用于已知最大和最小值的度量。比如：磁盘使用情况，查询结果的相关性等。注意： <meter> 不能作为一个进度
+			    条来使用， 进度条 <progress> 标签。
+	<nav>、		//<nav> 标签定义导航链接的部分。并不是所有的 HTML 文档都要使用到 <nav> 元素。<nav> 元素只是作为标注一个导航链接的区域。
+			    在不同设备上（手机或者PC）可以制定导航链接是否显示，以适应不同屏幕的需求。
+	<output>、	//<output> 标签作为计算结果输出显示(比如执行脚本的输出)。
+	<progress>、	//<progress> 标签定义运行中的任务进度（进程）。
+	<section>、	//<section> 标签定义了文档的某个区域。比如章节、头部、底部或者文档的其他区域。
+	<source>、	//<source> 标签为媒体元素（比如 <video> 和 <audio>）定义媒体资源。<source> 标签允许您规定两个视频/音频文件共浏览器根据它对媒体
+			    类型或者编解码器的支持进行选择。
+
+|--------------------------------
+|------------>HTML5移动端浅谈：
+|-------------------------------------
+
+	移动端的页面多数情况下用百分比或者媒体查询来设置页面的宽高度 这样会达到响应的效果
+	这里解释几点
+	1.-webkit-tap-highlight-color: rgba(0,0,0,0);也可以写成-webkit-tap-highlight-color: transparent; 去掉点击时高光显示 你也可以更改里面的参数 达到你想要的点击显示高光效果
+	2.-webkit-touch-callout: none; //长按页面时不触发系统菜单
+	3.-webkit-user-select: none; //长按无法选择文本 这个很有用 一般如果body里面没有添加这个属性的手机页面 当我们长按某段文字的时候就会出现选中这段文字弹出“复制，全选”等选项 但在webapp开发里 这个就显得很不友好 
+	所以尤其是在webapp开发的时候为了达到与native一样的真实效果 必须的添加
+	4.html,body{ width: 100%; height: 100%;} 这个是整个文档的初始化宽高度 后面的子级都是按照这个数据设置
+
+|--------------------------------
+|------------>CSS3的text-overflow：
+|-------------------------------------
+
+	text-overflow 属性规定当文本溢出包含元素时发生的事情。
+	注意：overflow: hidden; text-overflow:ellipsis;white-space:nowrap;一定要一起用
+	1.一定要给容器定义宽度.
+	2.如果少了overflow: hidden;文字会横向撑到容易的外面
+	3.如果少了white-space:nowrap;文字会把容器的高度往下撑；即使你定义了高度，省略号也不会出现，多余的文字会被裁切掉
+	4.如果少了text-overflow:ellipsis;多余的文字会被裁切掉，就相当于你这样定义text-overflow:clip.如果容器是table，当文字内容过多时，不换行，而是出现...
+
+|--------------------------------
+|------------>a标签妙用：
+|-------------------------------------
+
+	<a href="tel:400-888-6633">拨打电话<a>
+
+	<a href="sms:19956321564">发送短信<a>
+
+	<a href="mailto:mail@mail.com">发送邮件<a>
+
+|--------------------------------
+|------------>-webkit-line-clamp：
+|-------------------------------------
+
+	-webkit-line-clamp 是一个 不规范的属性（unsupported WebKit property），它没有出现在 CSS 规范草案中。
+	限制在一个块元素显示的文本的行数。 为了实现该效果，它需要组合其他外来的WebKit属性。常见结合属性：
+	display: -webkit-box; 必须结合的属性 ，将对象作为弹性伸缩盒子模型显示 。
+	-webkit-box-orient 必须结合的属性 ，设置或检索伸缩盒对象的子元素的排列方式 。
+	text-overflow，可以用来多行文本的情况下，用省略号“...”隐藏超出范围的文本 。
+	语法：
+	-webkit-line-clamp：<number>
+	默认值： ? ?表示不清楚；
+	适用于：块元素
+	继承性：无
+	动画性：否
+	计算值：指定的值
+	取值：
+	<number>：
+	块元素显示的文本的行数。
+
+	1、box-orient          在父元素上设置   子元素排列 vertical (垂直) or horizontal（水平）
+
+	2、box-flex               在子元素上设置   兄弟元素之间比例，仅作一个系数
+
+	3、box-align             在父元素上设置    box 排列
+
+	4、box-direction    在父元素上设置    box 方向  可设置reverse排序相反
+
+	5、box-flex-group  在子元素上设置   以组为单位的流体系数
+
+	6、box-ordinal-group    以组为单位的子元素排列方向
+
+	7、box-pack              在父元素上设置   可设置center和vertically
+
+
+	overflow : hidden;
+	text-overflow: ellipsis;
+	display: -webkit-box;
+	-webkit-line-clamp: 2;
+	-webkit-box-orient: vertical;
+
+
+|--------------------------------
+|------------>ime-mode
+|-------------------------------------
+
+	ime-mode:disabled 禁止表单使用文本框输入法
+
+	ime-mode的语法解释如下：
+
+	ime-mode : auto | active | inactive | disabled
+
+	取值：
+
+	auto  : 默认值。不影响IME的状态。与不指定 ime-mode 属性时相同
+
+	active  : 指定所有使用IME输入的字符。即激活本地语言输入法。用户仍可以撤销激活IME
+
+	inactive  : 指定所有不使用IME输入的字符。即激活非本地语言。用户仍可以撤销激活IME
+
+	disabled  : 完全禁用IME。对于有焦点的控件(如输入框)，用户不可以激活IME
+
+	于是
+
+	在全局样式中定义如下：
+
+	.ime-disabled{ime-mode:disabled;}/* 屏蔽输入法 */
+
+
+|--------------------------------
+|------------>滚动条
+|-------------------------------------
+
+	//参考网址：https://my.oschina.net/hehongbo/blog/205128
+
+	::-webkit-scrollbar {/*隐藏滚轮*/
+	display: none;
+	}
+	CSS3自定义滚动条样式 -webkit-scrollbar
+
+	前言
+	webkit支持拥有overflow属性的区域，列表框，下拉菜单，textarea的滚动条自定义样式，所以用处还是挺大的。当然，兼容所有浏览器的滚动条样式目前是不存在的。
+
+	滚动条组成
+	::-webkit-scrollbar 滚动条整体部分
+	::-webkit-scrollbar-thumb  滚动条里面的小方块，能向上向下移动（或往左往右移动，取决于是垂直滚动条还是水平滚动条）
+	::-webkit-scrollbar-track  滚动条的轨道（里面装有Thumb）
+	::-webkit-scrollbar-button 滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+	::-webkit-scrollbar-track-piece 内层轨道，滚动条中间部分（除去）
+	::-webkit-scrollbar-corner 边角，即两个滚动条的交汇处
+	::-webkit-resizer 两个滚动条的交汇处上用于通过拖动调整元素大小的小控件
+
+	/*定义滚动条高宽及背景 高宽分别对应横竖滚动条的尺寸*/
+	::-webkit-scrollbar
+	{
+	    width: 16px;
+	    height: 16px;
+	    background-color: #F5F5F5;
+	}
+	 
+	/*定义滚动条轨道 内阴影+圆角*/
+	::-webkit-scrollbar-track
+	{
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	    border-radius: 10px;
+	    background-color: #F5F5F5;
+	}
+	 
+	/*定义滑块 内阴影+圆角*/
+	::-webkit-scrollbar-thumb
+	{
+	    border-radius: 10px;
+	    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+	    background-color: #555;
+	}
+	 
+
+	详细设置
+	定义滚动条就是利用伪元素与伪类，那什么是伪元素和伪类呢？
+
+	伪类大家应该很熟悉:link,:focus,:hover，此外CSS3中又增加了许多伪类选择器，如:nth-child，:last-child，:nth-last-of-type()等。
+
+	CSS中的伪元素大家以前看过：:first-line,:first-letter,:before,:after。那么在CSS3中，伪元素进行了调整，在以前的基础上增加了一
+	个“：”也就是现在变成了“::first-letter,::first-line,::before,::after”，另外CSS3还增加了一个“::selection”。两个“：：”
+	和一个“：”在css3中主要用来区分伪类和伪元素。
+
+	webkit的伪类和伪元素的实现很强，可以把滚动条当成一个页面元素来定义，再结合一些高级的CSS3属性，比如渐变、圆角、RGBa等等。然后
+	如果有些地方要用图片，可以把图片也可以转换成Base64，不然每次都得加载那个多个图片，增加请求数。
+
+	任何对象都可以设置：边框、阴影、背景图片等等，创建的滚动条任然会按照操作系统本身的设置来完成其交互的行为。下面的伪类可以应用
+	到上面的伪元素中。有点小复杂，具体怎么写可以看第一个demo，那里也有注释。
+
+	:horizontal
+	//horizontal伪类适用于任何水平方向上的滚动条
+	 
+	:vertical
+	//vertical伪类适用于任何垂直方向的滚动条
+	 
+	:decrement
+	//decrement伪类适用于按钮和轨道碎片。表示递减的按钮或轨道碎片，例如可以使区域向上或者向右移动的区域和按钮
+	 
+	:increment
+	//increment伪类适用于按钮和轨道碎片。表示递增的按钮或轨道碎片，例如可以使区域向下或者向左移动的区域和按钮
+	 
+	:start
+	//start伪类适用于按钮和轨道碎片。表示对象（按钮 轨道碎片）是否放在滑块的前面
+	 
+	:end
+	//end伪类适用于按钮和轨道碎片。表示对象（按钮 轨道碎片）是否放在滑块的后面
+ 
+	:double-button
+	//double-button伪类适用于按钮和轨道碎片。判断轨道结束的位置是否是一对按钮。也就是轨道碎片紧挨着一对在一起的按钮。
+	 
+	:single-button
+	//single-button伪类适用于按钮和轨道碎片。判断轨道结束的位置是否是一个按钮。也就是轨道碎片紧挨着一个单独的按钮。
+	 
+	:no-button
+	no-button伪类表示轨道结束的位置没有按钮。
+	 
+	:corner-present
+	//corner-present伪类表示滚动条的角落是否存在。
+	 
+	:window-inactive
+	//适用于所有滚动条，表示包含滚动条的区域，焦点不在该窗口的时候。
+	 
+	::-webkit-scrollbar-track-piece:start {
+	/*滚动条上半边或左半边*/
+	}
+	 
+	::-webkit-scrollbar-thumb:window-inactive {
+	/*当焦点不在当前区域滑块的状态*/
+	}
+	 
+	::-webkit-scrollbar-button:horizontal:decrement:hover {
+	/*当鼠标在水平滚动条下面的按钮上的状态*/
+	}
+
+
+|--------------------------------
+|------------>format-detection（iphone兼容）
+|-------------------------------------
+
+	meta name="format-detection" content="telephone=no"
+	meta name="format-detection" content="email=no"
+	meta name="format-detection" content="adress=no" 
+	也可以连写：meta name="format-detection" content="telephone=no,email=no,adress=no"
+	下面具体说下每个设置的作用：
+	一、telephone
+	你明明写的一串数字没加链接样式，而iPhone会自动把你这个文字加链接样式、并且点击这个数字还会自动拨号！想去掉这个拨号链接该如何操作呢？这时我们的meta又该大显神通了，代码如下：
+	telephone=no就禁止了把数字转化为拨号链接！
+	telephone=yes就开启了把数字转化为拨号链接，要开启转化功能，这个meta就不用写了,在默认是情况下就是开启！
+	二、email
+	告诉设备不识别邮箱，点击之后不自动发送
+	email=no禁止作为邮箱地址！
+	email=yes就开启了把文字默认为邮箱地址，这个meta就不用写了,在默认是情况下就是开启！
+	三、adress
+	adress=no禁止跳转至地图！
+	adress=yes就开启了点击地址直接跳转至地图的功能,在默认是情况下就是开启！
+
+
+|--------------------------------
+|------------>h5黑科技
+|-------------------------------------
+	很多开发者估计都没有正确认识这个border-radius，因为基本上很多人都是这么用的：
+	border-radius
+	    .box {
+	      border-radius: 4px;
+	    }
+	稍微高端一点的是这样的：
+	
+	    .box {
+	      border-radius: 4px 6px 6px 4px;
+	    }
+	然而，终极黑科技是这样用的：
+	
+	    .box {
+	      border-radius: 5px 5px 3px 2px / 5px 5px 1px 3px;
+	    }
+	对，它可以赋8个值，没见过？不着急，具体的解释是这样的：
+	
+	斜线前面的影响的是水平方向，斜线后面影响的是垂直方向，各个数字就分别代表四个不一样的方向。
+	
+	outline-offset
+	相信很多开发者在写CSS的时候对下面的语句会很熟悉：
+	
+	    input {
+	         outline : none;
+	    }
+	
+	    input:focus {
+	         outline : none;
+	    }
+	这就是将 input 输入框去掉默认的蓝线框的方法。其实，这里还有说一个就是，CSS 中还有一个 outline-offset 	属性，在这个属性中，你可以设置默认线框的距离；像这样
+	
+	    input {
+	      outline-offset: 4px ;
+	    }
+	调节该属性值的大小你就可以看到outline的距离变化了。
+	
+	
+	类的声明
+	对于下面的类的声明，可能大家都很熟悉：
+	
+	    .col-8 {
+	
+	     }
+	这当然没什么，但是如果你这样写呢：
+	
+	    .♥ {
+	      color: hotpink;
+	    }
+	
+	    .★ {
+	      color: yellow;
+	    }
+	嗯，看起来怎么样，你是可以这么用的：
+	
+	    <div class="♥ ★"></div>
+	只要是 Unicode 的，你都可以这么来声明你的类。
+	
+	选中连续的几个元素
+	
+	    ol li:nth-child(n+7):nth-child(-n+14) {
+	      background: lightpink;
+	    }
+	    /** Or Safari Way **/
+	    ol li:nth-child(-n+14):nth-child(n+7) {
+	      background: lightpink;
+	    }
+	上面的这种写法其实就可以达到选中ol下面的第七到第十四个li元素。
+	
+	这个网址不一般啊：http://blog.csdn.net/mr_lp/article/details/53539218
+	讲述了h5的新标签contenteditable，让我大开眼见
+	width的设置也让我不想说了，我以前就很纳闷 width: calc(100% - (10px + 5px) * 2);看下这个calc方法就明白了
+
+	text-decoration
+
+	在习惯了对text-decoration赋值为none之后，我们需要重新来认识一下这一位小伙伴了，它其实是可以接受三个变量声明：
+
+	a {
+	  text-decoration: overline aqua wavy;
+	}
+	这三个分别是代表：text-decoration-line， text-decoration-color 和 text-decoration-style
+
+	::first-letter
+
+	这个感觉比较神奇，虽然对于我们常用CSS修饰中文文本可能没有很大的用处，不过我看到这个时候其实还是觉得比较意外的，竟然还有这个东西：
+
+	<div class='text'>
+	    I am sample text
+	</div>
+	然后CSS可以这样写：
+	.text::first-letter {
+	  color: blue;
+	  background: yellow;
+	}
+	第一个字母I就会被修饰到，很神奇
+
+	扫光动画: http://www.cnblogs.com/pingfan1990/p/5557181.html
+
+	图片水平镜像翻转
+	.example-1 {
+	    transform: scaleX(-1); /* 方法一 */
+	}
+	.example-2 {
+	    transform: rotateY(180deg); /* 方法二 */
+	}
+
+	自旋转运动
+
+	<div class="example"></div>
+	.example {
+	    position: absolute;
+	    top: 200px;
+	    left: 200px;
+	    width: 100px;
+	    height: 100px;
+	    border: 2px solid #000;
+	    border-radius: 50%;
+	    animation: autogyRation 4s linear infinite;
+	}
+	  
+	@keyframes autogyRation {
+	    from {
+	        transform: rotate(0deg) translate(-60px) rotate(0deg);
+	    }
+	    to {
+	        transform: rotate(360deg) translate(-60px) rotate(-360deg);
+	    }
+	}	
+
+
+	字体：
+
+	ios9+的css字体设置了-apple-system的话中文会调用苹方，英文/数字则调San Francisco；San Francisco在ios/mac上没有显式暴露出来(不能通过字体名字调用)，需要通过这种方式调用；
+	在不支持-apple-system的ios系统下会调用华文细黑的中文/英文/数字；
+	sans-serif在非ios9+下会调用华文细黑的中文/英文/数字；
+	sans-serif在ios9+下会调用苹方的中文/英文/数字；
+	sans-serif在安卓下会调用系统的中文/英文字体，一般不需要其他设置；
+	总的来说sans-serif在手机系统下会调用默认中文字体的中文/英文/数字
+	由此移动的字体reset，可以统一设置为：
+
+	font-family: -apple-system,Helvetica,sans-serif;
+
+	垂直居中
+	垂直居中显示某个DIV，我们知道CSS中天然有水平居中的样式text-align:center。唯独这个垂直居中无解。
+
+	当然你可以将容器设置为display:table，然后将子元素也就是要垂直居中显示的元素设置为display:table-cell，然后加上vertical-align:middle来实现，但此种实现往往会因为display：table
+	而破坏整体布局，那还不如直接用table标签了呢。
+
+	下面这个样式利用了translate来巧妙实现了垂直居中样式，需IE9+。
+
+	.center-vertical {
+	    position: relative;
+	    top: 50%;
+	    transform: translateY(-50%);
+	}
+	相比而言，水平居中要简单得多，像上面提到的text-align:center，经常用到的技巧还有margin:0 auto。但对于margin大法也只在子元素宽度小于容器宽度时管用，当子元素宽度大于容器宽度时此法失效。
+
+	如法炮制，利用left和transform同样可实现水平居中，不过意义不大，毕竟text-align和margin差不多满足需求了。
+
+	.center-horizontal {
+	    position: relative;
+	    left: 50%;
+	    transform: translateX(-50%); 
+	}
+
+
+|--------------------------------
+|------------>特殊属性所有值
+|-------------------------------------
+
+	-------->>>---------box-sizing属性
+
+	{
+		-webkit-box-sizing: content-box;
+		-moz-box-sizing: content-box;
+		box-sizing: content-box;
+	}
+	可以设置三个值之一：
+		content-box,	计算宽度border和padding不计算入width之内
+		border-box,		border和padding计算入width之内
+		inherit		规定应从父元素继承 box-sizing 属性的值
+
+	-------->>>---------box-lines属性（父元素设置display:-webkit-box）
+
+	{
+		-webkit-box-lines: multiple;
+		-moz-box-lines: multiple;
+	}
+	box-lines是用来决定子元素是可以换行显示呢？还是就算挤出油还是单行显示。两个可选值：
+	single | multiple
+	其中single是默认值，表示死活不换行
+
+	-------->>>---------flex-wrap：nowrap | wrap | wrap-reverse (父元素设置display:flex)
+
+	{
+		-webkit-flex-wrap:nowrap;
+		flex-wrap:nowrap;
+	}
+	nowrap： flex容器为单行。该情况下flex子项可能会溢出容器
+	wrap： flex容器为多行。该情况下flex子项溢出的部分会被放置到新行，子项内部会发生断行
+	wrap-reverse： 反转 wrap 排列。
+
+	-------->>>---------flex-shrink：<number>(父元素设置display:flex)
+
+	设置或检索弹性盒的收缩比率。
+	根据弹性盒子元素所设置的收缩因子作为比率来收缩空间。
+
+	<ul class="flex">
+	    <li>a</li>
+	    <li>b</li>
+	    <li>c</li>
+	</ul>
+
+	.flex{display:flex;width:400px;margin:0;padding:0;list-style:none;}
+	.flex li{width:200px;}
+	.flex li:nth-child(3){flex-shrink:3;}
+
+	flex-shrink的默认值为1，如果没有显示定义该属性，将会自动按照默认值1在所有因子相加之后计算比率来进行空间收缩。
+	本例中c显式的定义了flex-shrink，a,b没有显式定义，但将根据默认值1来计算，可以看到总共将剩余空间分成了5份，其中a占1份，b占1份，c占3分，即1:1:3
+	我们可以看到父容器定义为400px，子项被定义为200px，相加之后即为600px，超出父容器200px。那么这么超出的200px需要被a,b,c消化
+	通过收缩因子，所以加权综合可得200*1+200*1+200*3=1000px；
+	于是我们可以计算a,b,c将被移除的溢出量是多少：
+	a被移除溢出量：(200*1/1000)*200，即约等于40px
+	b被移除溢出量：(200*1/1000)*200，即约等于40px
+	c被移除溢出量：(200*3/1000)*200，即约等于120px
+	最后a,b,c的实际宽度分别为：200-40=160px, 200-40=160px, 200-120=80px
+
+	-------->>>---------box-align属性（父元素设置display:-webkit-box）
+
+	start： 设置伸缩盒对象的子元素从开始位置对齐
+	center： 设置伸缩盒对象的子元素居中对齐
+	end： 设置伸缩盒对象的子元素从结束位置对齐
+	baseline： 设置伸缩盒对象的子元素基线对齐
+	stretch： 设置伸缩盒对象的子元素自适应父元素尺寸
+	说明：
+	设置或检索伸缩盒对象的子元素的对齐方式。查看其兄弟属性box-pack，两者的效果正好（相反）互补
+	效果等同于过渡版本的flex-align属性和新版本的align-items属性；
+	box-align的对齐方式受box-orient影响；
+	默认情况下（即box-orient设置为horizontal）start和end所呈现的效果等同于顶部对齐和底部对齐；
+	当box-orient设置为vertical时，start和end所呈现的效果等同于左对齐和右对齐；
+	对应的脚本特性为boxAlign。
+
+	例子：
+	<!DOCTYPE html>
+	<html lang="zh-cmn-Hans">
+	<head>
+	<meta charset="utf-8" />
+	<title>box-align_CSS参考手册_web前端开发参考手册系列</title>
+	<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+	<style>
+	h1{font:bold 20px/1.5 georgia,simsun,sans-serif;}
+	.box,.box2{display:-webkit-box;display:-moz-box;display:-ms-box;margin:0;padding:10px;background:#000;list-style:none;}
+	.box{-webkit-box-orient:horizontal;-moz-box-orient:horizontal;-ms-box-orient:horizontal;width:260px;height:100px;}
+	.box2{-webkit-box-orient:vertical;-moz-box-orient:vertical;-ms-box-orient:vertical;width:100px;height:260px;}
+	.box0,.box06{-webkit-box-align:start;-moz-box-align:start;-ms-box-align:start;}
+	.box02,.box07{-webkit-box-align:center;-moz-box-align:center;-ms-box-align:center;}
+	.box03,.box08{-webkit-box-align:end;-moz-box-align:end;-ms-box-align:end;}
+	.box04,.box09{-webkit-box-align:baseline;-moz-box-align:baseline;-ms-box-align:baseline;}
+	.box05,.box010{-webkit-box-align:stretch;-moz-box-align:stretch;-ms-box-align:stretch;}
+	.box li,.box2 li{padding:10px;}
+	.box li:nth-child(1),.box2 li:nth-child(1){background:#666;}
+	.box li:nth-child(2),.box2 li:nth-child(2){background:#999;}
+	.box li:nth-child(3),.box2 li:nth-child(3){background:#ccc;}
+	</style>
+	</head>
+	<body>
+	<h1>横向排列时子元素从起始位置对齐 box-align:start;</h1>
+	<ul class="box0 box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>横向排列时子元素居中对齐 box-align:center;</h1>
+	<ul class="box02 box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>横向排列时子元素从结束位置对齐 box-align:end;</h1>
+	<ul class="box03 box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>横向排列时子元素基线对齐 box-align:baseline;</h1>
+	<ul class="box04 box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>横向排列时子元素自适应父元素 box-align:stretch;</h1>
+	<ul class="box05 box">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>纵向排列时子元素从起始位置对齐 box-align:start;</h1>
+	<ul class="box0 box2">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>纵向排列时子元素居中对齐 box-align:center;</h1>
+	<ul class="box02 box2">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>纵向排列时子元素从结束位置对齐 box-align:end;</h1>
+	<ul class="box03 box2">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>纵向排列时子元素基线对齐 box-align:baseline;</h1>
+	<ul class="box04 box2">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	<h1>纵向排列时子元素自适应父元素 box-align:stretch;</h1>
+	<ul class="box05 box2">
+		<li>1</li>
+		<li>2</li>
+		<li>3</li>
+	</ul>
+	</body>
+	</html>
+
+	-------->>>---------align-items(父元素设置：display: flex;)
+
+	flex-start： 弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴起始边界。
+	flex-end： 弹性盒子元素的侧轴（纵轴）起始位置的边界紧靠住该行的侧轴结束边界。
+	center： 弹性盒子元素在该行的侧轴（纵轴）上居中放置。（如果该行的尺寸小于弹性盒子元素的尺寸，则会向两个方向溢出相同的长度）。
+	baseline： 如弹性盒子元素的行内轴与侧轴为同一条，则该值与'flex-start'等效。其它情况下，该值将参与基线对齐。
+	stretch： 如果指定侧轴大小的属性值为'auto'，则其值会使项目的边距盒的尺寸尽可能接近所在行的尺寸，但同时会遵照'min/max-width/height'属性的限制。
+
+	<!DOCTYPE html>
+	<html lang="zh-cmn-Hans">
+	<head>
+	<meta charset="utf-8" />
+	<title>align-items_CSS参考手册_web前端开发参考手册系列</title>
+	<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+	<style>
+	h1{font:bold 20px/1.5 georgia,simsun,sans-serif;}
+	.box{
+		display:-webkit-flex;
+		display:flex;
+		width:200px;height:100px;margin:0;padding:0;border-radius:5px;list-style:none;background-color:#eee;}
+	.box li{margin:5px;border-radius:5px;background:#aaa;text-align:center;}
+	.box li:nth-child(1){padding:10px;}
+	.box li:nth-child(2){padding:15px 10px;}
+	.box li:nth-child(3){padding:20px 10px;}
+	#box{
+		-webkit-align-items:flex-start;
+		align-items:flex-start;
+	}
+	#box2{
+		-webkit-align-items:flex-end;
+		align-items:flex-end;
+	}
+	#box3{
+		-webkit-align-items:center;
+		align-items:center;
+	}
+	#box4{
+		-webkit-align-items:baseline;
+		align-items:baseline;
+	}
+	#box5{
+		-webkit-align-items:strecth;
+		align-items:strecth;
+	}
+	</style>
+	</head>
+	<body>
+	<h1>align-items示例：</h1>
+	<h2>align-items:flex-start</h2>
+	<ul id="box" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>align-items:flex-end</h2>
+	<ul id="box2" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>align-items:center</h2>
+	<ul id="box3" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>align-items:baseline</h2>
+	<ul id="box4" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>align-items:strecth</h2>
+	<ul id="box5" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	</body>
+	</html>
+
+	-------->>>---------touch-action
+	{
+		-ms-touch-action: pan-y;
+		touch-action: pan-y;
+	}
+	IE下的触控效果的设置
+	 
+	1.auto                        默认值，允许浏览器给元素添加touch行为
+	2.none                       不允许默认的touch行为
+	3.pan-x                      允许水平轴触摸驱动的平移
+	4.pan-y                      允许垂直轴触摸驱动的平移
+	5.pinch-zoom             允许拖拽缩放 
+	6.manipulation           允许触摸驱动的平移和拖拽缩放
+	7.double-tap-zoom     允许整个页面双击缩放指定元素
+	8.inherit                      继承父元素的值
+
+	-------->>>---------perspective
+
+	设置3D视图距离屏幕的视图可视距离
+	指定观察者与「z=0」平面的距离，使具有三维位置变换的元素产生透视效果。「z>0」的三维元素比正常大，而
+	「z<0」时则比正常小，大小程度由该属性的值决定。
+	当该属性值为「非none」时，元素将会创建局部堆叠上下文。
+	对应的脚本特性为perspective。
+
+	-------->>>---------backface-visibility
+
+	{
+		-webkit-backface-visibility: hidden;
+		-moz-backface-visibility: hidden;
+		-ms-backface-visibility: hidden;
+		backface-visibility: hidden;
+	}
+	visible： 指定元素背面可见，允许显示正面的镜像。
+	hidden： 指定元素背面不可见
+
+	例子：
+	<!DOCTYPE html>
+	<html lang="zh-cmn-Hans">
+	<head>
+	<meta charset="utf-8" />
+	<title>backface-visibility_CSS参考手册_web前端开发参考手册系列</title>
+	<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com" />
+	<meta name="copyright" content="www.doyoe.com" />
+	<style>
+	body {
+	    -webkit-perspective: 800px;
+	    perspective: 800px;
+	    -webkit-perspective-origin: 50%;
+	    perspective-origin: 50%;
+	}
+	.cube {
+	    display: inline-block;
+	    width: 100px;
+	    height: 100px;
+	    margin: 50px;
+	    -webkit-transform-style: preserve-3d;
+	    transform-style: preserve-3d;
+	    -webkit-animation: rotate 5s infinite;
+	    animation: rotate 5s infinite;
+	}
+	.cube > div {
+	    position: absolute;
+	    width: 100%;
+	    height: 100%;
+	    box-shadow: inset 0 0 15px rgba(0, 0, 0, .2);
+	    background-color: rgba(255, 255, 255, .1);
+	    color: gray;
+	    font-size: 20px;
+	    line-height: 100px;
+	    text-align: center;
+	}
+	.front {
+	    -webkit-transform: translatez(50px);
+	    transform: translatez(50px);
+	}
+	.back {
+	    -webkit-transform: rotatey(180deg) translatez(50px);
+	    transform: rotatey(180deg) translatez(50px);
+	}
+	.right {
+	    -webkit-transform: rotatey(90deg) translatez(50px);
+	    transform: rotatey(90deg) translatez(50px);
+	}
+	.left {
+	    -webkit-transform: rotatey(-90deg) translatez(50px);
+	    transform: rotatey(-90deg) translatez(50px);
+	}
+	.top {
+	    -webkit-transform: rotatex(90deg) translatez(50px);
+	    transform: rotatex(90deg) translatez(50px);
+	}
+	.bottom {
+	    -webkit-transform: rotatex(-90deg) translatez(50px);
+	    transform: rotatex(-90deg) translatez(50px);
+	}
+	@-webkit-keyframes rotate {
+	    from {
+	        -webkit-transform: rotatey(0);
+	    }
+	    to {
+	        -webkit-transform: rotatey(360deg);
+	    }
+	}
+	@keyframes rotate {
+	    from {
+	        transform: rotatey(0);
+	    }
+	    to {
+	        transform: rotatey(360deg);
+	    }
+	}
+	.c1 > div {
+	    -webkit-backface-visibility: visible;
+	    backface-visibility: visible;
+	}
+	.c2 > div {
+	    -webkit-backface-visibility: hidden;
+	    backface-visibility: hidden;
+	}
+	</style>
+	</head>
+	<body>
+	<div class="cube c1">
+	    <div class="front">1</div>
+	    <div class="back">2</div>
+	    <div class="right">3</div>
+	    <div class="left">4</div>
+	    <div class="top">5</div>
+	    <div class="bottom">6</div>
+	</div>
+
+	<div class="cube c2">
+	    <div class="front">1</div>
+	    <div class="back">2</div>
+	    <div class="right">3</div>
+	    <div class="left">4</div>
+	    <div class="top">5</div>
+	    <div class="bottom">6</div>
+	</div>
+	</body>
+	</html>
+
+	-------->>>---------justify-content（父元素设置：display: flex;）
+
+	flex-start：弹性盒子元素将向行起始位置对齐。该行的第一个子元素的主起始位置的边界将与该行的主起始位置的边界对齐，同时所有后续的伸缩盒项目与其前
+	一个项目对齐。
+	flex-end：弹性盒子元素将向行结束位置对齐。该行的第一个子元素的主结束位置的边界将与该行的主结束位置的边界对齐，同时所有后续的伸缩盒项目与其前一
+	个项目对齐。
+	center：弹性盒子元素将向行中间位置对齐。该行的子元素将相互对齐并在行中居中对齐，同时第一个元素与行的主起始位置的边距等同与最后一个元素与行的主
+	结束位置的边距（如果剩余空间是负数，则保持两端相等长度的溢出）。
+	space-between：弹性盒子元素会平均地分布在行里。如果最左边的剩余空间是负数，或该行只有一个子元素，则该值等效于'flex-start'。在其它情况下，第一个
+	元素的边界与行的主起始位置的边界对齐，同时最后一个元素的边界与行的主结束位置的边距对齐，而剩余的伸缩盒项目则平均分布，并确保两两之间的空白空间
+	相等。
+	space-around：弹性盒子元素会平均地分布在行里，两端保留子元素与子元素之间间距大小的一半。如果最左边的剩余空间是负数，或该行只有一个伸缩盒项目，
+	则该值等效于'center'。在其它情况下，伸缩盒项目则平均分布，并确保两两之间的空白空间相等，同时第一个元素前的空间以及最后一个元素后的空间为其他空
+	白空间的一半。
+
+	例子:
+	<!DOCTYPE html>
+	<html lang="zh-cmn-Hans">
+	<head>
+	<meta charset="utf-8" />
+	<title>justify-content_CSS参考手册_web前端开发参考手册系列</title>
+	<meta name="author" content="Joy Du(飘零雾雨), dooyoe@gmail.com, www.doyoe.com" />
+	<style>
+	h1{font:bold 20px/1.5 georgia,simsun,sans-serif;}
+	.box{
+		display:-webkit-flex;
+		display:flex;
+		width:400px;height:100px;margin:0;padding:0;border-radius:5px;list-style:none;background-color:#eee;}
+	.box li{margin:5px;padding:10px;border-radius:5px;background:#aaa;text-align:center;}
+	#box{
+		-webkit-justify-content:flex-start;
+		justify-content:flex-start;
+	}
+	#box2{
+		-webkit-justify-content:flex-end;
+		justify-content:flex-end;
+	}
+	#box3{
+		-webkit-justify-content:center;
+		justify-content:center;
+	}
+	#box4{
+		-webkit-justify-content:space-between;
+		justify-content:space-between;
+	}
+	#box5{
+		-webkit-justify-content:space-around;
+		justify-content:space-around;
+	}
+	</style>
+	</head>
+	<body>
+	<h1>justify-content示例：</h1>
+	<h2>justify-content:flex-start</h2>
+	<ul id="box" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>justify-content:flex-end</h2>
+	<ul id="box2" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>justify-content:center</h2>
+	<ul id="box3" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>justify-content:space-between</h2>
+	<ul id="box4" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	<h2>justify-content:space-around</h2>
+	<ul id="box5" class="box">
+		<li>a</li>
+		<li>b</li>
+		<li>c</li>
+	</ul>
+	</body>
+	</html>
+
+
+
+|--------------------------------
+|------------>文字垂直居中
+|-------------------------------------
+
+.calendar-box .conetent ul li>span{
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: inline-block;
+	width: 100%;
+	height: 100%;
+}
+.calendar-box .conetent ul li>span:after {
+   display:inline-block;
+   width:0;
+   height:100%;
+   vertical-align:middle;
+   content:"";
+}
