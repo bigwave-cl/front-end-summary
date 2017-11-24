@@ -1,22 +1,22 @@
-²Ù×÷·ûÖ®¼äµÄÓÅÏÈ¼¶£¨¸ßµ½µÍ£©:
+ï»¿æ“ä½œç¬¦ä¹‹é—´çš„ä¼˜å…ˆçº§ï¼ˆé«˜åˆ°ä½ï¼‰:
 
-ËãÊõ²Ù×÷·û ¡ú ±È½Ï²Ù×÷·û ¡ú Âß¼­²Ù×÷·û ¡ú "="¸³Öµ·ûºÅ
-
-
-¾ßÓĞ true ºÍ false Á½¸öÊôĞÔµÄÊôĞÔ£¬
-Èç checked, selected »òÕß disabled Ê¹ÓÃprop()£¬ÆäËûµÄÊ¹ÓÃ attr()
+ç®—æœ¯æ“ä½œç¬¦ â†’ æ¯”è¾ƒæ“ä½œç¬¦ â†’ é€»è¾‘æ“ä½œç¬¦ â†’ "="èµ‹å€¼ç¬¦å·
 
 
-//»ñÈ¡Ò»¸öÔÂÖĞµÄ×îºóÒ»Ìì
+å…·æœ‰ true å’Œ false ä¸¤ä¸ªå±æ€§çš„å±æ€§ï¼Œ
+å¦‚ checked, selected æˆ–è€… disabled ä½¿ç”¨prop()ï¼Œå…¶ä»–çš„ä½¿ç”¨ attr()
+
+
+//è·å–ä¸€ä¸ªæœˆä¸­çš„æœ€åä¸€å¤©
 function getLastDay(year,month) {         
-    var new_year = year;    //È¡µ±Ç°µÄÄê·İ          
-    var new_month = month++;//È¡ÏÂÒ»¸öÔÂµÄµÚÒ»Ìì£¬·½±ã¼ÆËã£¨×îºóÒ»Ìì²»¹Ì¶¨£©          
+    var new_year = year;    //å–å½“å‰çš„å¹´ä»½          
+    var new_month = month++;//å–ä¸‹ä¸€ä¸ªæœˆçš„ç¬¬ä¸€å¤©ï¼Œæ–¹ä¾¿è®¡ç®—ï¼ˆæœ€åä¸€å¤©ä¸å›ºå®šï¼‰          
     if(month>12) {         
-     	new_month -=12;        //ÔÂ·İ¼õ          
-     	new_year++;            //Äê·İÔö          
+     	new_month -=12;        //æœˆä»½å‡          
+     	new_year++;            //å¹´ä»½å¢          
     }         
-    var new_date = new Date(new_year,new_month,1);                //È¡µ±Äêµ±ÔÂÖĞµÄµÚÒ»Ìì          
-    return (new Date(new_date.getTime()-1000*60*60*24)).getDate();//»ñÈ¡µ±ÔÂ×îºóÒ»ÌìÈÕÆÚ          
+    var new_date = new Date(new_year,new_month,1);                //å–å½“å¹´å½“æœˆä¸­çš„ç¬¬ä¸€å¤©          
+    return (new Date(new_date.getTime()-1000*60*60*24)).getDate();//è·å–å½“æœˆæœ€åä¸€å¤©æ—¥æœŸ          
 } 
 var d = new Date();
 document.write(d.getFullYear());
@@ -27,9 +27,9 @@ document.write(getLastDay(d.getFullYear(),d.getMonth()+1));
 document.write('<br/>');
 
 
-ÅĞ¶ÏÎÄ×ÖÓĞ¶àÉÙ×Ö·û´®£º
+åˆ¤æ–­æ–‡å­—æœ‰å¤šå°‘å­—ç¬¦ä¸²ï¼š
 
-·½·¨Ò»£ºÊ¹ÓÃÕıÔò±í´ïÊ½£¬´úÂëÈçÏÂ£º
+æ–¹æ³•ä¸€ï¼šä½¿ç”¨æ­£åˆ™è¡¨è¾¾å¼ï¼Œä»£ç å¦‚ä¸‹ï¼š
 
 function getByteLen(val) {
     var len = 0;
@@ -47,7 +47,7 @@ function getByteLen(val) {
     return len;
 }
 
-·½·¨¶ş£ºÊ¹ÓÃ×Ö·ûunicodeÅĞ¶Ï£º·½·¨ÈçÏÂ£º
+æ–¹æ³•äºŒï¼šä½¿ç”¨å­—ç¬¦unicodeåˆ¤æ–­ï¼šæ–¹æ³•å¦‚ä¸‹ï¼š
 function getByteLen(val) {
     var len = 0;
     for (var i = 0; i < val.length; i++) {
@@ -64,22 +64,22 @@ function getByteLen(val) {
     return len;
 }
 
-1.²Ù×÷ÈÎºÎÔªËØÇ°ÏÈ½«Æä´ÓÎÄµµĞ¶ÔØ£¬ÍêÁËÔÙÌù»ØÈ¥¡£
+1.æ“ä½œä»»ä½•å…ƒç´ å‰å…ˆå°†å…¶ä»æ–‡æ¡£å¸è½½ï¼Œå®Œäº†å†è´´å›å»ã€‚
 
 var $myList = $("#list-container > ul").detach();
-//...Ò»´ó¶Ñ¶Ô$myListµÄ´¦Àí
+//...ä¸€å¤§å †å¯¹$myListçš„å¤„ç†
 $myList.appendTo("#list-container");
 
 
-2.´úÂëÀï½«HTML×éÖ¯ºÃºóÔÙÒ»´ÎĞÔÌùµ½DOMÖĞÈ¥¡£
+2.ä»£ç é‡Œå°†HTMLç»„ç»‡å¥½åå†ä¸€æ¬¡æ€§è´´åˆ°DOMä¸­å»ã€‚
 
-// ÕâÑù²»ºÃ
+// è¿™æ ·ä¸å¥½
 var $myList = $("#list");
 for(var i = 0; i < 10000; i++){
     $myList.append("<li>"+i+"</li>");
 }
  
-// ÕâÑùºÃ
+// è¿™æ ·å¥½
 var $myList = $("#list");
 var list = "";
 for(var i = 0; i < 10000; i++){
@@ -87,7 +87,7 @@ for(var i = 0; i < 10000; i++){
 }
 $myList.html(list);
  
-// µ«ÕâÑù¸üºÃ
+// ä½†è¿™æ ·æ›´å¥½
 var array = []; 
 for(var i = 0; i < 10000; i++){
     array[i] = "<li>"+i+"</li>"; 
@@ -97,11 +97,11 @@ $myList.html(array.join(''));
 http://www.cnblogs.com/Wayou/p/jquery_best_practise.html
 
 
-typeofµÄÒ»Ğ©Éı¼¶ÓÃ·¨£ºhttp://sentsin.com/web/55_2.html
+typeofçš„ä¸€äº›å‡çº§ç”¨æ³•ï¼šhttp://sentsin.com/web/55_2.html
 
-ÉãÊÏ¶È×ª»ªÊÏ¶È
+æ‘„æ°åº¦è½¬åæ°åº¦
 
-´ÓCelsiusÉãÊÏ¶È×ª»»ÎªFahrenheit»ªÊÏ¶ÈµÄËã·¨ÊÇ£ºÉãÊÏ¶ÈµÄÎÂ¶È³ËÓÚ9³ıÓÚ5£¬ÔÙ¼ÓÉÏ32¡£
+ä»Celsiusæ‘„æ°åº¦è½¬æ¢ä¸ºFahrenheitåæ°åº¦çš„ç®—æ³•æ˜¯ï¼šæ‘„æ°åº¦çš„æ¸©åº¦ä¹˜äº9é™¤äº5ï¼Œå†åŠ ä¸Š32ã€‚
 
 function convert(celsius) {
 // Only change code below this line
@@ -117,18 +117,48 @@ convert(30);
 
 
 
-¼ì²â¿Í»§¶ËÏµÍ³£º
-¡°Navigator.appversion¡±ÓÃÓÚÔÚ¿Í»§¶ËÖĞ²éÕÒ²Ù×÷ÏµÍ³µÄÃû³Æ¡£
-ÎªÁË¼ì²â¿Í»§¶Ë»úÆ÷ÉÏµÄ²Ù×÷ÏµÍ³£¬Ó¦Ê¹ÓÃnavigator.appVersionS£¨×Ö·û´®ÊôĞÔ£©¡£
+æ£€æµ‹å®¢æˆ·ç«¯ç³»ç»Ÿï¼š
+â€œNavigator.appversionâ€ç”¨äºåœ¨å®¢æˆ·ç«¯ä¸­æŸ¥æ‰¾æ“ä½œç³»ç»Ÿçš„åç§°ã€‚
+ä¸ºäº†æ£€æµ‹å®¢æˆ·ç«¯æœºå™¨ä¸Šçš„æ“ä½œç³»ç»Ÿï¼Œåº”ä½¿ç”¨navigator.appVersionSï¼ˆå­—ç¬¦ä¸²å±æ€§ï¼‰ã€‚
 
-    ÆÁÄ»¶ÔÏóÓÃÓÚ´Ó¿Í»§¶ËÆÁÄ»¶ÁÈ¡ĞÅÏ¢¡£ÆÁÄ»¶ÔÏóµÄÊôĞÔÊÇ:
-    AvailHeight£º¸ø³ö¿Í»§¶ËÆÁÄ»µÄ¸ß¶È
-    AvailWidth£º¸ø³ö¿Í»§¶ËÆÁÄ»µÄ¿í¶È¡£
-    ColorDepth£º¸ø³ö¿Í»§¶ËÆÁÄ»ÉÏÍ¼ÏñµÄÎ»Éî¶È
-    Height£º¸ø³ö¿Í»§¶ËÆÁÄ»µÄ×Ü¸ß¶È£¬°üÀ¨ÈÎÎñÀ¸
-    Width£º¸ø³ö¿Í»§¶ËÆÁÄ»µÄ×Ü¿í¶È£¬°üÀ¨ÈÎÎñÀ¸
+    å±å¹•å¯¹è±¡ç”¨äºä»å®¢æˆ·ç«¯å±å¹•è¯»å–ä¿¡æ¯ã€‚å±å¹•å¯¹è±¡çš„å±æ€§æ˜¯:
+    AvailHeightï¼šç»™å‡ºå®¢æˆ·ç«¯å±å¹•çš„é«˜åº¦
+    AvailWidthï¼šç»™å‡ºå®¢æˆ·ç«¯å±å¹•çš„å®½åº¦ã€‚
+    ColorDepthï¼šç»™å‡ºå®¢æˆ·ç«¯å±å¹•ä¸Šå›¾åƒçš„ä½æ·±åº¦
+    Heightï¼šç»™å‡ºå®¢æˆ·ç«¯å±å¹•çš„æ€»é«˜åº¦ï¼ŒåŒ…æ‹¬ä»»åŠ¡æ 
+    Widthï¼šç»™å‡ºå®¢æˆ·ç«¯å±å¹•çš„æ€»å®½åº¦ï¼ŒåŒ…æ‹¬ä»»åŠ¡æ 
 
 
-½âÊÍwindow.onloadºÍonDocumentReady£¿
-ÔÚ¼ÓÔØÒ³ÃæÉÏµÄËùÓĞĞÅÏ¢Ö®Ç°£¬²»»áÔËĞĞonloadº¯Êı¡£ Õâµ¼ÖÂÔÚÖ´ĞĞÈÎºÎ´úÂëÖ®Ç°µÄÏÔ×ÅÑÓ³Ù¡£
-onDocumentReadyÔÚ¼ÓÔØDOMÖ®ºó¼ÓÔØ´úÂë¡£ ËüÔÊĞíÌáÇ°´¦Àí´úÂë¡£
+è§£é‡Šwindow.onloadå’ŒonDocumentReadyï¼Ÿ
+åœ¨åŠ è½½é¡µé¢ä¸Šçš„æ‰€æœ‰ä¿¡æ¯ä¹‹å‰ï¼Œä¸ä¼šè¿è¡Œonloadå‡½æ•°ã€‚ è¿™å¯¼è‡´åœ¨æ‰§è¡Œä»»ä½•ä»£ç ä¹‹å‰çš„æ˜¾ç€å»¶è¿Ÿã€‚
+onDocumentReadyåœ¨åŠ è½½DOMä¹‹ååŠ è½½ä»£ç ã€‚ å®ƒå…è®¸æå‰å¤„ç†ä»£ç ã€‚
+
+## è€å¸æœºçš„å¥—è·¯
+
+//å–æ•´
+parseInt(a,10); //Before
+Math.floor(a); //Before
+a>>0; //Before
+~~a; //After
+a|0; //After
+
+//å››èˆäº”å…¥
+Math.round(a); //Before
+a+.5|0; //After
+
+//å†…ç½®å€¼
+undefined; //Before
+void 0; //After, å¿«
+0[0]; //After, ç•¥æ…¢
+
+//å†…ç½®å€¼
+Infinity;
+1/0;
+
+//å¸ƒå°”å€¼çŸ­å†™æ³•
+true; //Before
+!0; //After
+
+//å¸ƒå°”å€¼çŸ­å†™æ³•
+false; //Before
+!1; //After
